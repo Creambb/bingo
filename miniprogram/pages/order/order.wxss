@@ -107,50 +107,19 @@
   min-width: 20rpx;
 }
 
-
-
-.chartsEmpty {
-  text-align: center;
-}
-
-.chartsEmpty image {
-  width: 80%;
-}
-
-.chartsEmpty text {
-  display: inline-block;
-  width: 100%;
-  font-size: 32rpx;
-  margin-bottom: 10rpx;
-}
-
-.chartsEmpty button {
-  margin-top: 30rpx;
-  background: #FF9900;
-  width: 200rpx;
-  height: 80rpx;
-  min-height: 80rpx;
-  line-height: 80rpx;
-  font-size: 36rpx;
-}
-
-.chartsEmpty button,
 .chartsBottom button {
-  /* width: 20px; */
-  padding: 0;
   color: #fff;
   font-weight: normal;
-}
-
-.chartsBottom button {
   margin: 0;
   background: #FF0000;
-  max-width: 50px;
   height: 60rpx;
   min-height: 60rpx;
   line-height: 60rpx;
   font-size: 30rpx;
   border-radius: 60rpx;
+  width: auto;
+padding: 0 30rpx;
+
 }
 
 

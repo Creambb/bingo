@@ -1,0 +1,470 @@
+.listActive {
+  color: red;
+  background-color: #fff;
+}
+
+.listInactive {
+  background-color: #F8F8F8;
+}
+
+.header .headerClass {
+  color: red;
+  margin-left: 20rpx;
+}
+
+.header .headerClass,
+.header .headerPin {
+  font-size: 28rpx;
+}
+
+.header {
+  display: flex;
+  background-color: rgba(219, 219, 221, 1);
+  align-items: center;
+  height: 60rpx;
+  padding: 10rpx 0;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* height: 50rpx; */
+  border-radius: 30rpx;
+  margin-left: 20rpx;
+  padding: 0 20rpx;
+  background-color: white;
+  width: 65%;
+}
+
+.searchBack{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 20rpx;
+}
+
+.search input {
+  font-size: 30rpx;
+  width: 100%;
+}
+
+.search text {
+  color: gainsboro;
+  font-family: monospace;
+  font-size: 30rpx;
+  line-height: 46rpx;
+}
+
+.search image {
+  padding: 0 5rpx;
+  width: 46rpx;
+  height: 46rpx;
+}
+
+.hotSearchBox{
+  width: 100%;
+}
+
+.hotSearchTitle{
+  width: 100%;
+  font-weight: bold;
+  font-size: 32rpx;
+  display: block;
+}
+
+.hotSearchWord{
+  display: inline-block;
+  background: #eee;
+  font-size: 28rpx;
+  margin: 20rpx 20rpx 0 0;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.main {
+  display: flex;
+  padding-top: 80rpx;
+}
+
+.left {
+  width: 25%
+}
+
+.left view {
+  width: 180rpx;
+  height: 70rpx;
+  padding-top: 30rpx;
+  text-align: center;
+  /* background-color: #F8F8F8; */
+  font-size: 32rpx;
+}
+
+.right {
+  width: 75%;
+}
+
+.listItem2 {
+  display: flex;
+}
+
+.listItem .img {
+  width: 200rpx;
+  height: 200rpx;
+  text-align: center;
+  padding-top: 10rpx;
+}
+
+.listItem .img image {
+  width: 80%;
+  height: 80%
+}
+
+.itemTitle {
+  font-size: 32rpx;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  color: gray;
+}
+
+.listItem .listText {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6rpx;
+
+  width: calc(100% - 200rpx);
+}
+
+.listItem .listText view {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.listItem .listText text {
+  font-size: 34rpx;
+  margin-top: 10rpx;
+}
+
+.listItem .listText .money {
+  color: red;
+}
+
+.listItem .listText view text {
+  font-size: 28rpx;
+  color: silver;
+  margin-right: 60rpx;
+  /* add  */
+  min-width: 80px;
+  display: inline-block;
+}
+
+.listItem .listText view button {
+  background-color: red;
+  color: white;
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-top: 0px;
+}
+
+.left-image {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 8rpx;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  /* width: 6px; */
+  /* height: 6px; */
+  background-color: #ffffff;
+}
+
+.header .search-button {
+  /* width: auto; */
+  min-height: 50rpx;
+  line-height: 50rpx;
+  width: 15%;
+  padding: 0;
+  line-height: 1;
+  font-size: 30rpx;
+}
+
+.add-image {
+  width: 40rpx;
+  height: 40rpx;
+  padding-right: 20rpx;
+}
+
+::-webkit-scrollbar-track {
+  height: 20rpx;
+  color: black;
+}
+
+/* pages/goods/goods.wxss */
+
+/**index.wxss**/
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.contain {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 140rpx;
+  padding-bottom: 100rpx;
+}
+
+.nav {
+  height: 100rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* line-height: 100rpx; */
+  background: #f7f7f7;
+  font-size: 28rpx;
+  white-space: nowrap;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.nav-image {
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  margin: 16rpx auto 6rpx;
+}
+
+.nav-item {
+  width: 25%;
+  display: inline-block;
+  text-align: center;
+}
+
+.nav-item.active {
+  color: #fc7946;
+}
+
+.tab-box {
+  background: greenyellow;
+  padding-bottom: 100rpx;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.tab-content {
+  overflow-y: scroll;
+}
+
+.animationShowAlert {
+  -webkit-animation: animationShowAlert .4s;
+  animation: animationShowAlert .4s;
+  -webkit-animation-name: animationShowAlert;
+  animation-name: animationShowAlert;
+}
+
+@-webkit-keyframes animationShowAlert {
+  0% {
+    -webkit-transform: scale3d(0, 0, 0);
+    transform: scale3d(0.5, 0.5, 0.5);
+    opacity: 0;
+  }
+
+  50% {
+    -webkit-animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 1;
+  }
+}
+
+@keyframes animationShowAlert {
+  0% {
+    -webkit-transform: scale3d(0, 0, 0);
+    transform: scale3d(0.5, 0.5, 0.5);
+    opacity: 0;
+  }
+
+  50% {
+    -webkit-animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 1;
+  }
+}
+
+.animationHideAlert {
+  -webkit-animation: animationHideAlert .4s;
+  animation: animationHideAlert .4s;
+  -webkit-animation-name: animationHideAlert;
+  animation-name: animationHideAlert;
+}
+
+@-webkit-keyframes animationHideAlert {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 1;
+  }
+
+  50% {
+    -webkit-animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+  }
+
+  100% {
+    -webkit-transform: scale3d(0, 0, 0);
+    transform: scale3d(0.5, 0.5, 0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes animationHideAlert {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 1;
+  }
+
+  50% {
+    -webkit-animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+  }
+
+  100% {
+    -webkit-transform: scale3d(0, 0, 0);
+    transform: scale3d(0.5, 0.5, 0.5);
+    opacity: 0;
+  }
+}
+
+.alertDetils {
+  position: fixed;
+  box-sizing: border-box;
+  padding-bottom: 100rpx;
+  width: 100%;
+  height: 100%;
+  background: rgba(238, 238, 238, 0.6);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.alertDetilsBox {
+  background: #fff;
+  padding: 30rpx 40rpx;
+  width: 70%;
+}
+
+.alertTitle {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.alertTypeTitle {
+  font-size: 26rpx;
+  color: #666;
+  margin: 16rpx 0 12rpx;
+}
+
+.alertCloseImg {
+  margin-top: 20rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.alertTypeBlock {
+  margin-right: 24rpx;
+  padding: 8rpx 12rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 4px;
+  font-size: 30rpx;
+  display: inline-block;
+}
+
+.alertTypeBlock text {
+  /* padding: 6rpx 10rpx; */
+}
+
+.alertBottomBox {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24rpx;
+}
+
+.alertPrice {
+  color: red;
+  font-size: 34rpx;
+}
+
+.alertAddCharts {
+  font-size: 30rpx;
+  background-color: #FF9900;
+  padding: 6rpx 10rpx;
+  border-radius: 8rpx;
+}
+
+.typeActive {
+  color: #FF9900;
+  border-color: #FF9900;
+}
+
+.navImgBlock {
+  position: relative;
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0 auto;
+}
+
+.chartsNum {
+  position: absolute;
+  /* display: block; */
+  top: -10rpx;
+  right: -14rpx;
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 20rpx;
+  line-height: 30rpx;
+  background-color: #FF6600;
+  border-radius: 30rpx;
+  color: #fff;
+}
+
+.searchList{
+  /* display: flex; */
+  /* padding-top: 80rpx; */
+  /* position: fixed; */
+  z-index: 1;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin-top: 80rpx;
+  padding: 20rpx 20rpx;
+}
+

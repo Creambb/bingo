@@ -1,0 +1,32 @@
+<!--pages/order/order.wxml-->
+<!--pages/charts/charts.wxml-->
+<header bg='../../images/index/back.svg' title="Bingo"></header>
+<view class="container">
+	<view wx:if="{{isShowConfirm}}" class="confirmDetils">
+		<view class="confirmBox {{isAlertShowAnimation? 'animationShowAlert' : 'animationHideAlert'}}">
+			<view class="confirmTitle">确定不要了吗？</view>
+			<view class="confirmButton">
+				<text bindtap="cancleConfirm">取消</text>
+				<text bindtap="clearConfirm">确定</text>
+			</view>
+		</view>
+	</view>
+	<view class="chartsBox" wx:if="{{chartsList.length !== 0}}">
+		<view class="chartsItem" wx:for="{{chartsList}}" wx:for-item="chartsItem" wx:for-index="idx" wx:key="idx">
+			<image class="chartsItemImg" src="{{chartsItem.url}}"></image>
+			<view class="chartsItemDetails">
+				<view class="chartsItemLeft">
+					<text class="chartsItemText1">{{chartsItem.text}}</text>
+					<text class="chartsItemText2">{{chartsItem.type}}</text>
+				</view>
+				<text class="chartsItemText2">×{{chartsItem.number}}</text>
+				<text class="chartsItemText3">￥{{chartsItem.amount}}</text>
+			</view>
+		</view>
+
+	</view>
+	<view class="chartsBottom">
+		<view>合计:<text class="chartsBottomPrice">￥{{count}}</text></view>
+		<button type="mini" class="chartsButton" bindtap="goBack">去支付</button>
+	</view>
+</view>

@@ -1,0 +1,229 @@
+/* pages/order/order.wxss */
+.container {
+  /* height: 100%; */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 160rpx 20rpx 120rpx;
+  background: #f3f3f3;
+  overflow: auto;
+}
+
+.chartsBox {
+  padding-top: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+
+.chartsTop {
+  margin: 0 20rpx;
+  padding: 16rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.chartsTop text {
+  color: #333;
+  font-size: 24rpx;
+}
+
+.chartsTop view {
+  display: flex;
+  align-items: center;
+}
+
+.chartsTopSelect image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+
+.chartsTopClear{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+.chartsItem {
+  padding: 0 30rpx 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.chartsItemImg {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.chartsItemDetails {
+  width: calc(100% - 160rpx);
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chartsItemLeft{
+  display: flex;
+  flex-direction: column;
+}
+
+.chartsItemText1 {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.chartsItemText2 {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+}
+
+.chartsItemText3 {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #000;
+  font-weight: bold;
+}
+
+.chartsItemNum {
+  display: inline-block;
+  position: absolute;
+  bottom: 20rpx;
+  right: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.chartsItemNum image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.chartsItemNum text {
+  display: inline-block;
+  margin: 0 20rpx;
+  font-size: 30rpx;
+  min-width: 20rpx;
+}
+
+
+
+.chartsEmpty {
+  text-align: center;
+}
+
+.chartsEmpty image {
+  width: 80%;
+}
+
+.chartsEmpty text {
+  display: inline-block;
+  width: 100%;
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+
+.chartsEmpty button {
+  margin-top: 30rpx;
+  background: #FF9900;
+  width: 200rpx;
+  height: 80rpx;
+  min-height: 80rpx;
+  line-height: 80rpx;
+  font-size: 36rpx;
+}
+
+.chartsEmpty button,
+.chartsBottom button {
+  /* width: 20px; */
+  padding: 0;
+  color: #fff;
+  font-weight: normal;
+}
+
+.chartsBottom button {
+  margin: 0;
+  background: #FF0000;
+  max-width: 50px;
+  height: 60rpx;
+  min-height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  border-radius: 60rpx;
+}
+
+
+.chartsBottom {
+  /* border-top: 1px solid #f0f0f0;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between; */
+  border-top: 1px solid #f0f0f0;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.chartsBottom view {
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+
+.chartsBottomPrice {
+  color: #FF6600;
+  font-size: 26rpx;
+}
+
+.confirmDetils {
+  position: fixed;
+  box-sizing: border-box;
+  padding-bottom: 100rpx;
+  width: 100%;
+  height: 100%;
+  background: rgba(238, 238, 238, 0.6);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.confirmBox {
+  background: #fff;
+  width: 70%;
+  border-radius: 10rpx;
+}
+
+.confirmTitle {
+  text-align: center;
+  padding: 40rpx 10rpx;
+  font-size: 36rpx;
+}
+
+.confirmButton {
+  border-top: 1px solid #f0f0f0;
+}
+
+.confirmButton text{
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-size: 36rpx;
+}
+
+.confirmButton text:first-child{
+  border-right: 1px solid #f0f0f0;
+  color: #999;
+}
+
+.confirmButton text:last-child{
+  color: #FF9900;
+}

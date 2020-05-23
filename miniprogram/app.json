@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/goods/goods",
+    "pages/charts/charts",
+    "pages/order/order",
+    "pages/home/home",
+    "pages/test/test",
+    "pages/mine/mine",
+    "pages/template/template",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "./images/index/home_unchecked.png",
+        "selectedIconPath": "./images/index/home_checked.png"
+      },
+      {
+        "pagePath": "pages/goods/goods",
+        "text": "商品",
+        "iconPath": "./images/index/goods_unchecked.png",
+        "selectedIconPath": "./images/index/goods_checked.png"
+      },
+      {
+        "pagePath": "pages/charts/charts",
+        "text": "购物车",
+        "iconPath": "./images/index/charts_unchecked.png",
+        "selectedIconPath": "./images/index/charts_checked.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "./images/index/mine_unchecked.png",
+        "selectedIconPath": "./images/index/mine_checked.png"
+      }
+    ],
+    "color": "#000000",
+    "selectedColor": "#fc7946"
+  },
+  "usingComponents": {
+    "header": "components/header/header"
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Bingo",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

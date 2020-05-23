@@ -1,0 +1,7 @@
+<!--pages/home/home.wxml-->
+<header title="Bingo"></header>
+<view>
+	<import src="../template/template.wxml" />
+	　　<view>This is index.wxml</view>
+	<!-- <template is="msgItem" data="{{navScrollLeft: globalData.navScrollLeft,currentTab: globalData.currentTab, navData: globalData.navData, switchNav: switchNav}}" /> -->
+</view>

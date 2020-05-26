@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    leftText: [{
+    leftText2: [{
       id: "01",
       image: "../../images/goods/activity.svg",
       text1: "活动",
@@ -34,6 +34,22 @@ Page({
     {
       id: "06",
       text1: "精品专区",
+    },
+    ],
+    leftText: [{
+      id: "hot",
+      image: "../../images/goods/activity.svg",
+      text1: "活动",
+    },
+    {
+      id: "new",
+      image: "../../images/goods/new.svg",
+      text1: "新品",
+    },
+    {
+      id: "recom",
+      image: "../../images/goods/recommend.svg",
+      text1: "推荐",
     },
     ],
     rightData: [{
@@ -317,6 +333,42 @@ Page({
       ],
     },
     ],
+    listData: [
+      // {
+      //   tag: 'hot',
+      //   title: "活动",
+      //   goodsList: []
+      // },
+      // {
+      //   tag: 'new',
+      //   title: "新品",
+      //   goodsList: []
+      // },
+      // {
+      //   tag: 'recom',
+      //   title: "推荐",
+      //   goodsList: []
+      // },
+    ],
+    hotData: {
+      tag: 'hot',
+      image: "../../images/goods/activity.svg",
+      title: "活动",
+      goodsList: []
+    },
+    newData: {
+      tag: 'new',
+      image: "../../images/goods/new.svg",
+      title: "新品",
+      goodsList: []
+    },
+    recomData: {
+      tag: 'recom',
+      title: "推荐",
+      image: "../../images/goods/recommend.svg",
+      goodsList: []
+    },
+    categoryList: [],
     classfiySelect: "",
     isClick: false,
     isShowAlert: false,
@@ -537,11 +589,102 @@ Page({
     console.log(this.data.isShowAlert)
   },
 
+  requestInfo: function (options, callBack) {
+    wx.request({
+      url: 'http://172.19.13.240:3000/api',
+      method: 'POST',
+      data: options,
+      // header: {
+      // 'content-type': 'application/json' // 默认值
+      // },
+      success(res) {
+        callBack(res.data);
+      },
+      fail(err) {
+        console.log('err');
+        console.log(err)
+      },
+    })
+  },
+
+  listGoods: function () {
+    var options = {
+      cmd: 'ListGoods'
+    }
+    var callBack = this.resolveListGoods;
+    this.requestInfo(options, callBack)
+  },
+
+  resolveListGoods: function (data) {
+    console.log(data);
+    var listData = this.data.listData;
+    var hotData = this.data.hotData;
+    var newData = this.data.newData;
+    var recomData = this.data.recomData;
+    data.list.forEach(function (item) {
+      if (item.isHot) {
+        hotData.goodsList.push(item);
+      }
+      if (item.isNew) {
+        newData.goodsList.push(item);
+      }
+      if (item.isRecom) {
+        recomData.goodsList.push(item);
+      }
+    })
+    console.log('listData');
+    console.log(listData);
+    listData.push(hotData, newData, recomData);
+    this.data.categoryList.forEach((item) => {
+      item.goodsList = [];
+      data.list.forEach((goodItem) => {
+        if (goodItem.goodsCatId == item.catId) {
+          item.goodsList.push(goodItem);
+        }
+      })
+      listData.push(item);
+    })
+    console.log(listData);
+    this.setData({
+      listData: listData
+    })
+    // this.setData({
+    //   hotData: hotData,
+    //   newData: newData,
+    //   recomData: recomData
+    // })
+  },
+
+  listCategory: function () {
+    var options = {
+      cmd: 'ListCategory'
+    }
+    var callBack = this.resolveListCategory;
+    this.requestInfo(options, callBack)
+  },
+
+  resolveListCategory: function (data) {
+    console.log(data);
+    var leftText = this.data.leftText;
+    leftText = leftText.concat(data.list);
+    console.log(leftText);
+    this.setData({
+      leftText: leftText
+    })
+    // var categoryList = data.list;
+    // this.setData({
+    //   categoryList: categoryList
+    // })
+    this.listGoods();
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.listCategory();
+
     this.setData({
       classfiySelect: this.data.leftText[0].id
     })

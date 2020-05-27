@@ -8,19 +8,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    leftText: [{
+    leftText2: [{
       id: "01",
-      image: "../../images/goods/activity.svg",
+      icon: "../../images/goods/activity.svg",
       text1: "活动",
     },
     {
       id: "02",
-      image: "../../images/goods/new.svg",
+      icon: "../../images/goods/new.svg",
       text1: "新品",
     },
     {
       id: "03",
-      image: "../../images/goods/recommend.svg",
+      icon: "../../images/goods/recommend.svg",
       text1: "推荐",
     },
     {
@@ -36,7 +36,23 @@ Page({
       text1: "精品专区",
     },
     ],
-    rightData: [{
+    leftText: [],
+    topData: [{
+      id: "99999",
+      icon: "../../images/goods/activity.svg",
+      text1: "活动",
+    },
+    {
+      id: "99998",
+      icon: "../../images/goods/new.svg",
+      text1: "新品",
+    },
+    {
+      id: "99997",
+      icon: "../../images/goods/recommend.svg",
+      text1: "推荐",
+    },],
+    rightData2: [{
       id: "01",
       title: "活动",
       frist: [{
@@ -317,6 +333,43 @@ Page({
       ],
     },
     ],
+    rightData: [],
+    listData: [
+      // {
+      //   tag: 'hot',
+      //   title: "活动",
+      //   goodsList: []
+      // },
+      // {
+      //   tag: 'new',
+      //   title: "新品",
+      //   goodsList: []
+      // },
+      // {
+      //   tag: 'recom',
+      //   title: "推荐",
+      //   goodsList: []
+      // },
+    ],
+    hotData: {
+      tag: 'hot',
+      image: "../../images/goods/activity.svg",
+      title: "活动",
+      goodsList: []
+    },
+    newData: {
+      tag: 'new',
+      image: "../../images/goods/new.svg",
+      title: "新品",
+      goodsList: []
+    },
+    recomData: {
+      tag: 'recom',
+      title: "推荐",
+      image: "../../images/goods/recommend.svg",
+      goodsList: []
+    },
+    categoryList: [],
     classfiySelect: "",
     isClick: false,
     isShowAlert: false,
@@ -411,6 +464,125 @@ Page({
     navScrollLeft: 0
   },
 
+  async listTopGoods() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    const options = {
+      cmd: 'ListTopGoods'
+    }
+    const res = await this.requestInfo('/api/goods', 'POST', options)
+    this.resolveTopGoods(res);
+  },
+
+  resolveTopGoods: function (result) {
+    if (result.code === 0) {
+      var data = result.body;
+      var leftText = this.data.leftText.concat(this.data.topData);
+      var topData = this.data.topData;
+      var rightData = this.data.rightData;
+      this.data.topData.forEach((item) => {
+        switch (item.id) {
+          case '99999':
+            item.goodsList = data.hotList;
+            break;
+          case '99998':
+            item.goodsList = data.newList;
+            break;
+          case '99997':
+            item.goodsList = data.recomList;
+            break;
+        }
+      })
+      rightData = rightData.concat(topData);
+      this.setData({
+        leftText: leftText,
+        rightData: rightData,
+        classfiySelect: leftText[0].id
+      })
+    }
+    wx.hideLoading();
+    this.ListCategory();
+  },
+
+  async ListCategory() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    const options = {
+      cmd: 'ListCategory'
+    }
+    const res = await this.requestInfo('/api/goods', 'POST', options)
+    var data = res.body;
+    var leftText = this.data.leftText;
+    var categoryList = data.list;
+    leftText = leftText.concat(data.list);
+    this.setData({
+      categoryList: categoryList,
+      leftText: leftText
+    });
+    wx.hideLoading();
+    this.ListGoods();
+  },
+
+  async ListGoods() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    const options = {
+      cmd: 'ListGoods'
+    }
+    const res = await this.requestInfo('/api/goods', 'POST', options);
+    // var data = res.body;
+    var data = res;
+    console.log(data);
+    var rightData  = this.data.rightData;
+    // var categoryList = this.data.categoryList;
+    this.data.categoryList.forEach((item) => {
+      item.goodsList = [];
+      data.list.forEach((goodItem) => {
+        if (goodItem.categoryId == item.id) {
+          console.log(goodItem.categoryId);
+          console.log(item.id);
+          console.log(goodItem.categoryId == item.id);
+          item.goodsList.push(goodItem);
+        }
+      })
+      rightData.push(item);
+    })
+    // rightData = rightData.concat(data.list);
+    console.log('rightData');
+    console.log(rightData);
+    this.setData({
+      rightData: rightData
+    })
+
+    wx.hideLoading();
+
+  },
+
+  resolveListGoods: function (data) {
+    console.log(data);
+    var listData = this.data.listData;
+    this.data.categoryList.forEach((item) => {
+      item.goodsList = [];
+      data.list.forEach((goodItem) => {
+        if (goodItem.goodsCatId == item.catId) {
+          item.goodsList.push(goodItem);
+        }
+      })
+      listData.push(item);
+    })
+    this.setData({
+      listData: listData
+    })
+    // this.setData({
+    //   hotData: hotData,
+    //   newData: newData,
+    //   recomData: recomData
+    // })
+  },
+
   onClickHotWord: function (e) {
     this.setData({
       searchWord: e.currentTarget.dataset.text
@@ -436,7 +608,7 @@ Page({
     var value = this.data.searchWord;
     var searchList = [];
     this.data.rightData.forEach((item) => {
-      item.frist.forEach((data) => {
+      item.goodsList.forEach((data) => {
         if (data.text.indexOf(value) > -1) {
           console.log(data.text.indexOf(value))
           console.log(data);
@@ -537,14 +709,44 @@ Page({
     console.log(this.data.isShowAlert)
   },
 
+  requestInfo(api, method, options) {
+    var _url = 'http://172.19.13.240:3000' + api
+    console.log(_url)
+    return new Promise(function (resolve, reject) {
+      wx.request({
+        url: _url,
+        method: method,
+        data: options,
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        success: function success(request) {
+          resolve(request.data);
+        },
+        fail: function fail(error) {
+          reject(error);
+        },
+        complete: function complete(aaa) {
+          // 加载完成
+        }
+      });
+    });
+  },
+
+
+
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      classfiySelect: this.data.leftText[0].id
-    })
+    this.listTopGoods();
+    // this.listCategory();
+
+    // this.setData({
+    //   classfiySelect: this.data.leftText[0].id
+    // })
   },
 
   /**
@@ -630,7 +832,7 @@ Page({
     var rightData = that.data.rightData;
     for (var i = 0; i < rightData.length; i++) {
       if (rightData[i]['id'] == e) {
-        return rightData[i]['frist'].length;
+        return rightData[i]['goodsList'].length;
       }
     }
   },

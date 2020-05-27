@@ -68,10 +68,10 @@
 
 	<view class='main' hidden="{{isSearch}}">
 		<view class='left'>
-			<scroll-view scroll-y="true" style="height: 1100rpx;" scroll-into-view="true" scroll-with-animation="true">
+			<scroll-view scroll-y="true" class="leftScroll" scroll-into-view="true" scroll-with-animation="true">
 				<block wx:for="{{leftText}}" wx:for-list="item" wx:for-index="idx" wx:key="idx">
 					<view class="{{classfiySelect == item.id?'listActive':'listInactive'}}" data-id='{{item.id}}' bindtap='left_list'>
-						<image hidden="{{!item.image}}" class="left-image" src="{{item.image}}"></image>
+						<image hidden="{{!item.icon}}" class="left-image" src="{{item.icon}}"></image>
 						<text>{{item.text1}}</text>
 					</view>
 				</block>
@@ -80,18 +80,18 @@
 		<view class='right'>
 			<scroll-view scroll-y="true" style="height: 1100rpx" bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-into-view="{{'inToview'+rigId}}" scroll-with-animation="true">
 				<block wx:for="{{rightData}}" wx:for-list="item" wx:for-index="id" wx:key="id">
-					<view class='itemTitle' id="{{'inToview'+item.id}}">{{item.title}}</view>
+					<view class='itemTitle' id="{{'inToview'+item.id}}">{{item.text1}}</view>
 					<view bindtap='particulars' class='listItem' data-id='{{item.id}}'>
-						<block wx:for="{{item.frist}}" wx:for-index="idx" wx:key="idx">
+						<block wx:for="{{item.goodsList}}" wx:for-index="idx" wx:key="idx">
 							<view class='listItem2' data-text="{{}}">
 								<view class='img'>
-									<image src='{{item.url}}'></image>
+									<image src='{{item.goodsUrl}}'></image>
 								</view>
 								<view class='listText'>
-									<text>{{item.text}}</text>
-									<text class='money'>¥{{item.money}}</text>
+									<text>{{item.goodsName}}</text>
+									<text class='money'>¥{{item.shopPrice}}</text>
 									<view>
-										<text>已售{{item.sum}}</text>
+										<text>已售{{item.saleNum}}</text>
 										<!-- <button size='mini' bindtap='particulars'>立即抢购</button> -->
 										<!-- <view> -->
 										<image bindtap="showDetails" data-selectitem="{{item}}" class="add-image" src="../../images/goods/add.svg"></image>

@@ -30,7 +30,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"enhance": true
 	},
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

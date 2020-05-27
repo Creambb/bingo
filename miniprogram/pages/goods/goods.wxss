@@ -468,3 +468,9 @@ page {
   padding: 20rpx 20rpx;
 }
 
+.leftScroll {
+  height: 1100rpx;
+  width: 180rpx;
+  background: #F8F8F8;
+}
+

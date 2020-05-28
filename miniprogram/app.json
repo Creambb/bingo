@@ -1,10 +1,11 @@
 {
   "pages": [
     "pages/goods/goods",
+    "pages/slip/slip",
+    "pages/test/test",
     "pages/charts/charts",
     "pages/order/order",
     "pages/home/home",
-    "pages/test/test",
     "pages/mine/mine",
     "pages/template/template",
     "pages/index/index",

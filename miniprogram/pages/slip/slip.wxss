@@ -1,13 +1,3 @@
-::-webkit-scrollbar{
-    width: 0;
-    height: 0;
-    color: transparent;
-}
-
-#header {
-  height: 140rpx;
-}
-
 .listActive {
   color: red;
   background-color: #fff;
@@ -17,17 +7,17 @@
   background-color: #F8F8F8;
 }
 
-.searchBox .headerClass {
+.header .headerClass {
   color: red;
   margin-left: 20rpx;
 }
 
-.searchBox .headerClass,
-.searchBox .headerPin {
+.header .headerClass,
+.header .headerPin {
   font-size: 28rpx;
 }
 
-.searchBox {
+.header {
   display: flex;
   background-color: rgba(219, 219, 221, 1);
   align-items: center;
@@ -51,7 +41,7 @@
   width: 65%;
 }
 
-.searchBack {
+.searchBack{
   width: 40rpx;
   height: 40rpx;
   margin-left: 20rpx;
@@ -75,18 +65,18 @@
   height: 46rpx;
 }
 
-.hotSearchBox {
+.hotSearchBox{
   width: 100%;
 }
 
-.hotSearchTitle {
+.hotSearchTitle{
   width: 100%;
   font-weight: bold;
   font-size: 32rpx;
   display: block;
 }
 
-.hotSearchWord {
+.hotSearchWord{
   display: inline-block;
   background: #eee;
   font-size: 28rpx;
@@ -193,7 +183,7 @@
   background-color: #ffffff;
 }
 
-.searchBox .search-button {
+.header .search-button {
   /* width: auto; */
   min-height: 50rpx;
   line-height: 50rpx;
@@ -226,7 +216,7 @@ page {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  /* padding-top: 140rpx; */
+  padding-top: 140rpx;
   padding-bottom: 100rpx;
 }
 
@@ -465,7 +455,7 @@ page {
   color: #fff;
 }
 
-.searchList {
+.searchList{
   /* display: flex; */
   /* padding-top: 80rpx; */
   /* position: fixed; */
@@ -483,3 +473,4 @@ page {
   width: 180rpx;
   background: #F8F8F8;
 }
+

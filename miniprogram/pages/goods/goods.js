@@ -1,6 +1,7 @@
 // pages/class/class.js
+let proListToTop = [];
 
-var app = getApp();
+let app = getApp();
 
 Page({
 
@@ -8,330 +9,335 @@ Page({
    * 页面的初始数据
    */
   data: {
-    leftText2: [{
-      id: "01",
-      icon: "../../images/goods/activity.svg",
-      text1: "活动",
-    },
-    {
-      id: "02",
-      icon: "../../images/goods/new.svg",
-      text1: "新品",
-    },
-    {
-      id: "03",
-      icon: "../../images/goods/recommend.svg",
-      text1: "推荐",
-    },
-    {
-      id: "04",
-      text1: "晨光系列",
-    },
-    {
-      id: "05",
-      text1: "文具专区",
-    },
-    {
-      id: "06",
-      text1: "精品专区",
-    },
+    headerHeight: 0,
+    searchHeight: 0,
+    leftText2: [
+      {
+        id: "01",
+        icon: "../../images/goods/activity.svg",
+        navTitle: "活动",
+      },
+      {
+        id: "02",
+        icon: "../../images/goods/new.svg",
+        navTitle: "新品",
+      },
+      {
+        id: "03",
+        icon: "../../images/goods/recommend.svg",
+        navTitle: "推荐",
+      },
+      {
+        id: "04",
+        navTitle: "晨光系列",
+      },
+      {
+        id: "05",
+        navTitle: "文具专区",
+      },
+      {
+        id: "06",
+        navTitle: "精品专区",
+      },
     ],
     leftText: [],
-    topData: [{
-      id: "99999",
-      icon: "../../images/goods/activity.svg",
-      text1: "活动",
-    },
-    {
-      id: "99998",
-      icon: "../../images/goods/new.svg",
-      text1: "新品",
-    },
-    {
-      id: "99997",
-      icon: "../../images/goods/recommend.svg",
-      text1: "推荐",
-    },],
-    rightData2: [{
-      id: "01",
-      title: "活动",
-      frist: [{
-        id: 1,
-        url: "../../images/goods/pencil01.jpg",
-        text: "晨光优品中性笔",
-        typeList: ['粉红色', '淡蓝色', '淡黄色'],
-        money: 3,
-        sum: 20,
+    topData: [
+      {
+        id: "99999",
+        icon: "../../images/goods/activity.svg",
+        navTitle: "活动",
       },
       {
-        id: 2,
-        url: "../../images/goods/pencil02.jpg",
-        text: "得力彩色中性笔",
-        typeList: ['白色', '橘色'],
-        money: 5.2,
-        sum: 20,
+        id: "99998",
+        icon: "../../images/goods/new.svg",
+        navTitle: "新品",
       },
       {
-        id: 3,
-        url: "../../images/goods/pencil03.jpg",
-        text: "得力糖果中性笔",
-        money: 12,
-        sum: 20,
+        id: "99997",
+        icon: "../../images/goods/recommend.svg",
+        navTitle: "推荐",
+      },],
+    rightData2: [
+      {
+        id: "01",
+        title: "活动",
+        frist: [{
+          id: 1,
+          url: "../../images/goods/pencil01.jpg",
+          text: "晨光优品中性笔",
+          typeList: ['粉红色', '淡蓝色', '淡黄色'],
+          money: 3,
+          sum: 20,
+        },
+        {
+          id: 2,
+          url: "../../images/goods/pencil02.jpg",
+          text: "得力彩色中性笔",
+          typeList: ['白色', '橘色'],
+          money: 5.2,
+          sum: 20,
+        },
+        {
+          id: 3,
+          url: "../../images/goods/pencil03.jpg",
+          text: "得力糖果中性笔",
+          money: 12,
+          sum: 20,
+        },
+        {
+          id: 4,
+          url: "../../images/goods/pencil04.jpg",
+          text: "按压式花边修正带",
+          money: 6.9,
+          sum: 20,
+        },
+        {
+          id: 5,
+          url: "../../images/goods/pencil05.jpg",
+          text: "得力文具便利贴",
+          money: 4,
+          sum: 20,
+        },
+        ],
       },
       {
-        id: 4,
-        url: "../../images/goods/pencil04.jpg",
-        text: "按压式花边修正带",
-        money: 6.9,
-        sum: 20,
+        id: "02",
+        title: "新品",
+        frist: [{
+          id: 21,
+          url: "../../images/goods/pencil01.jpg",
+          text: "晨光优品中性笔",
+          money: 3,
+          sum: 20,
+        },
+        {
+          url: "../../images/goods/pencil02.jpg",
+          text: "得力彩色中性笔",
+          money: 5.2,
+          sum: 20,
+          id: 22,
+        },
+        {
+          url: "../../images/goods/pencil03.jpg",
+          text: "得力糖果中性笔",
+          money: 12,
+          sum: 20,
+          id: 23,
+        },
+        {
+          url: "../../images/goods/pencil04.jpg",
+          text: "按压式花边修正带",
+          money: 6.9,
+          sum: 20,
+          id: 24,
+        },
+        {
+          url: "../../images/goods/pencil05.jpg",
+          text: "得力文具便利贴",
+          money: 4,
+          sum: 20,
+          id: 25,
+        },
+        ],
       },
       {
-        id: 5,
-        url: "../../images/goods/pencil05.jpg",
-        text: "得力文具便利贴",
-        money: 4,
-        sum: 20,
-      },
-      ],
-    },
-    {
-      id: "02",
-      title: "新品",
-      frist: [{
-        id: 21,
-        url: "../../images/goods/pencil01.jpg",
-        text: "晨光优品中性笔",
-        money: 3,
-        sum: 20,
-      },
-      {
-        url: "../../images/goods/pencil02.jpg",
-        text: "得力彩色中性笔",
-        money: 5.2,
-        sum: 20,
-        id: 22,
-      },
-      {
-        url: "../../images/goods/pencil03.jpg",
-        text: "得力糖果中性笔",
-        money: 12,
-        sum: 20,
-        id: 23,
-      },
-      {
-        url: "../../images/goods/pencil04.jpg",
-        text: "按压式花边修正带",
-        money: 6.9,
-        sum: 20,
-        id: 24,
-      },
-      {
-        url: "../../images/goods/pencil05.jpg",
-        text: "得力文具便利贴",
-        money: 4,
-        sum: 20,
-        id: 25,
-      },
-      ],
-    },
-    {
-      id: "03",
-      title: "推荐",
-      frist: [{
-        url: "../../images/goods/pencil01.jpg",
-        text: "晨光优品中性笔",
-        money: 3,
-        sum: 20,
-        id: 31,
+        id: "03",
+        title: "推荐",
+        frist: [{
+          url: "../../images/goods/pencil01.jpg",
+          text: "晨光优品中性笔",
+          money: 3,
+          sum: 20,
+          id: 31,
+        },
+        {
+          url: "../../images/goods/pencil02.jpg",
+          text: "得力彩色中性笔",
+          money: 5.2,
+          sum: 20,
+          id: 32,
+        },
+        {
+          url: "../../images/goods/pencil03.jpg",
+          text: "得力糖果中性笔(美)",
+          money: 12,
+          sum: 20,
+          id: 33,
+        },
+        {
+          url: "../../images/goods/pencil04.jpg",
+          text: "按压式花边修正带",
+          money: 6.9,
+          sum: 20,
+          id: 34,
+        },
+        {
+          url: "../../images/goods/pencil05.jpg",
+          text: "得力文具便利贴",
+          money: 4,
+          sum: 20,
+          id: 35,
+        },
+        ],
       },
       {
-        url: "../../images/goods/pencil02.jpg",
-        text: "得力彩色中性笔",
-        money: 5.2,
-        sum: 20,
-        id: 32,
+        id: "04",
+        title: "晨光系列",
+        frist: [{
+          url: "../../images/goods/pencil01.jpg",
+          text: "晨光优品中性笔",
+          money: 3,
+          sum: 20,
+          id: 41,
+        },
+        {
+          url: "../../images/goods/pencil02.jpg",
+          text: "得力彩色中性笔(美)",
+          money: 5.2,
+          sum: 20,
+          id: 42,
+        },
+        {
+          url: "../../images/goods/pencil03.jpg",
+          text: "得力糖果中性笔",
+          money: 12,
+          sum: 20,
+          id: 43,
+        },
+        {
+          url: "../../images/goods/pencil04.jpg",
+          text: "按压式花边修正带",
+          money: 6.9,
+          sum: 20,
+          id: 44,
+        },
+        {
+          url: "../../images/goods/pencil05.jpg",
+          text: "得力文具便利贴",
+          money: 4,
+          sum: 20,
+          id: 45,
+        },
+        ],
       },
       {
-        url: "../../images/goods/pencil03.jpg",
-        text: "得力糖果中性笔(美)",
-        money: 12,
-        sum: 20,
-        id: 33,
+        id: "05",
+        title: "文具专区",
+        frist: [{
+          url: "../../images/goods/pencil01.jpg",
+          text: "晨光优品中性笔(美)",
+          money: 3,
+          sum: 20,
+          id: 61,
+        },
+        {
+          url: "../../images/goods/pencil02.jpg",
+          text: "得力彩色中性笔",
+          money: 5.2,
+          sum: 20,
+          id: 62,
+        },
+        {
+          url: "../../images/goods/pencil03.jpg",
+          text: "得力糖果中性笔",
+          money: 12,
+          sum: 20,
+          id: 63,
+        },
+        {
+          url: "../../images/goods/pencil04.jpg",
+          text: "按压式花边修正带",
+          money: 6.9,
+          sum: 20,
+          id: 64,
+        },
+        {
+          url: "../../images/goods/pencil05.jpg",
+          text: "得力文具便利贴",
+          money: 4,
+          sum: 20,
+          id: 65,
+        },
+        ],
       },
       {
-        url: "../../images/goods/pencil04.jpg",
-        text: "按压式花边修正带",
-        money: 6.9,
-        sum: 20,
-        id: 34,
+        id: "06",
+        title: "精品专区",
+        frist: [{
+          url: "../../images/goods/pencil01.jpg",
+          text: "晨光优品中性笔",
+          money: 3,
+          sum: 20,
+          id: 1,
+        },
+        {
+          url: "../../images/goods/pencil02.jpg",
+          text: "得力彩色中性笔",
+          money: 5.2,
+          sum: 20,
+          id: 2,
+        },
+        {
+          url: "../../images/goods/pencil03.jpg",
+          text: "得力糖果中性笔",
+          money: 12,
+          sum: 20,
+          id: 2,
+        },
+        {
+          url: "../../images/goods/pencil04.jpg",
+          text: "按压式花边修正带",
+          money: 6.9,
+          sum: 20,
+          id: 2,
+        },
+        {
+          url: "../../images/goods/pencil05.jpg",
+          text: "得力文具便利贴",
+          money: 4,
+          sum: 20,
+        },
+        ],
       },
       {
-        url: "../../images/goods/pencil05.jpg",
-        text: "得力文具便利贴",
-        money: 4,
-        sum: 20,
-        id: 35,
+        id: "06",
+        title: "精品专区",
+        frist: [{
+          url: "../../images/goods/pencil01.jpg",
+          text: "晨光优品中性笔",
+          money: 3,
+          sum: 20,
+          id: 1,
+        },
+        {
+          url: "../../images/goods/pencil02.jpg",
+          text: "得力彩色中性笔",
+          money: 5.2,
+          sum: 20,
+          id: 2,
+        },
+        {
+          url: "../../images/goods/pencil03.jpg",
+          text: "得力糖果中性笔",
+          money: 12,
+          sum: 20,
+          id: 2,
+        },
+        {
+          url: "../../images/goods/pencil04.jpg",
+          text: "按压式花边修正带",
+          money: 6.9,
+          sum: 20,
+          id: 2,
+        },
+        {
+          url: "../../images/goods/pencil05.jpg",
+          text: "得力文具便利贴",
+          money: 4,
+          sum: 20,
+        },
+        ],
       },
-      ],
-    },
-    {
-      id: "04",
-      title: "晨光系列",
-      frist: [{
-        url: "../../images/goods/pencil01.jpg",
-        text: "晨光优品中性笔",
-        money: 3,
-        sum: 20,
-        id: 41,
-      },
-      {
-        url: "../../images/goods/pencil02.jpg",
-        text: "得力彩色中性笔(美)",
-        money: 5.2,
-        sum: 20,
-        id: 42,
-      },
-      {
-        url: "../../images/goods/pencil03.jpg",
-        text: "得力糖果中性笔",
-        money: 12,
-        sum: 20,
-        id: 43,
-      },
-      {
-        url: "../../images/goods/pencil04.jpg",
-        text: "按压式花边修正带",
-        money: 6.9,
-        sum: 20,
-        id: 44,
-      },
-      {
-        url: "../../images/goods/pencil05.jpg",
-        text: "得力文具便利贴",
-        money: 4,
-        sum: 20,
-        id: 45,
-      },
-      ],
-    },
-    {
-      id: "05",
-      title: "文具专区",
-      frist: [{
-        url: "../../images/goods/pencil01.jpg",
-        text: "晨光优品中性笔(美)",
-        money: 3,
-        sum: 20,
-        id: 61,
-      },
-      {
-        url: "../../images/goods/pencil02.jpg",
-        text: "得力彩色中性笔",
-        money: 5.2,
-        sum: 20,
-        id: 62,
-      },
-      {
-        url: "../../images/goods/pencil03.jpg",
-        text: "得力糖果中性笔",
-        money: 12,
-        sum: 20,
-        id: 63,
-      },
-      {
-        url: "../../images/goods/pencil04.jpg",
-        text: "按压式花边修正带",
-        money: 6.9,
-        sum: 20,
-        id: 64,
-      },
-      {
-        url: "../../images/goods/pencil05.jpg",
-        text: "得力文具便利贴",
-        money: 4,
-        sum: 20,
-        id: 65,
-      },
-      ],
-    },
-    {
-      id: "06",
-      title: "精品专区",
-      frist: [{
-        url: "../../images/goods/pencil01.jpg",
-        text: "晨光优品中性笔",
-        money: 3,
-        sum: 20,
-        id: 1,
-      },
-      {
-        url: "../../images/goods/pencil02.jpg",
-        text: "得力彩色中性笔",
-        money: 5.2,
-        sum: 20,
-        id: 2,
-      },
-      {
-        url: "../../images/goods/pencil03.jpg",
-        text: "得力糖果中性笔",
-        money: 12,
-        sum: 20,
-        id: 2,
-      },
-      {
-        url: "../../images/goods/pencil04.jpg",
-        text: "按压式花边修正带",
-        money: 6.9,
-        sum: 20,
-        id: 2,
-      },
-      {
-        url: "../../images/goods/pencil05.jpg",
-        text: "得力文具便利贴",
-        money: 4,
-        sum: 20,
-      },
-      ],
-    },
-    {
-      id: "06",
-      title: "精品专区",
-      frist: [{
-        url: "../../images/goods/pencil01.jpg",
-        text: "晨光优品中性笔",
-        money: 3,
-        sum: 20,
-        id: 1,
-      },
-      {
-        url: "../../images/goods/pencil02.jpg",
-        text: "得力彩色中性笔",
-        money: 5.2,
-        sum: 20,
-        id: 2,
-      },
-      {
-        url: "../../images/goods/pencil03.jpg",
-        text: "得力糖果中性笔",
-        money: 12,
-        sum: 20,
-        id: 2,
-      },
-      {
-        url: "../../images/goods/pencil04.jpg",
-        text: "按压式花边修正带",
-        money: 6.9,
-        sum: 20,
-        id: 2,
-      },
-      {
-        url: "../../images/goods/pencil05.jpg",
-        text: "得力文具便利贴",
-        money: 4,
-        sum: 20,
-      },
-      ],
-    },
     ],
     rightData: [],
     listData: [
@@ -351,26 +357,7 @@ Page({
       //   goodsList: []
       // },
     ],
-    hotData: {
-      tag: 'hot',
-      image: "../../images/goods/activity.svg",
-      title: "活动",
-      goodsList: []
-    },
-    newData: {
-      tag: 'new',
-      image: "../../images/goods/new.svg",
-      title: "新品",
-      goodsList: []
-    },
-    recomData: {
-      tag: 'recom',
-      title: "推荐",
-      image: "../../images/goods/recommend.svg",
-      goodsList: []
-    },
     categoryList: [],
-    classfiySelect: "",
     isClick: false,
     isShowAlert: false,
     isAlertShowAnimation: true,
@@ -461,7 +448,11 @@ Page({
       },
     ],
     currentTab: 1,
-    navScrollLeft: 0
+    navScrollLeft: 0,
+
+    currentActiveIndex: 0,
+    isClickMenu: false, // 是否点击菜单
+    proListToTop: [],  // 记录每一个类型的列表道顶部的距离
   },
 
   async listTopGoods() {
@@ -498,29 +489,8 @@ Page({
       this.setData({
         leftText: leftText,
         rightData: rightData,
-        classfiySelect: leftText[0].id
       })
     }
-    wx.hideLoading();
-    this.ListCategory();
-  },
-
-  async ListCategory() {
-    wx.showLoading({
-      title: '加载中',
-    })
-    const options = {
-      cmd: 'ListCategory'
-    }
-    const res = await this.requestInfo('/api/goods', 'POST', options)
-    var data = res.body;
-    var leftText = this.data.leftText;
-    var categoryList = data.list;
-    leftText = leftText.concat(data.list);
-    this.setData({
-      categoryList: categoryList,
-      leftText: leftText
-    });
     wx.hideLoading();
     this.ListGoods();
   },
@@ -533,32 +503,20 @@ Page({
       cmd: 'ListGoods'
     }
     const res = await this.requestInfo('/api/goods', 'POST', options);
-    // var data = res.body;
-    var data = res;
+    var data = res.body;
     console.log(data);
-    var rightData  = this.data.rightData;
+    var rightData = this.data.rightData;
     // var categoryList = this.data.categoryList;
-    this.data.categoryList.forEach((item) => {
-      item.goodsList = [];
-      data.list.forEach((goodItem) => {
-        if (goodItem.categoryId == item.id) {
-          console.log(goodItem.categoryId);
-          console.log(item.id);
-          console.log(goodItem.categoryId == item.id);
-          item.goodsList.push(goodItem);
-        }
-      })
-      rightData.push(item);
+    data.forEach((item) => {
+      if (item.isShow && item.goodsList.length != 0) {
+        rightData.push(item);
+      }
     })
-    // rightData = rightData.concat(data.list);
-    console.log('rightData');
-    console.log(rightData);
     this.setData({
       rightData: rightData
     })
-
     wx.hideLoading();
-
+    this.getEleHeight();
   },
 
   resolveListGoods: function (data) {
@@ -576,11 +534,6 @@ Page({
     this.setData({
       listData: listData
     })
-    // this.setData({
-    //   hotData: hotData,
-    //   newData: newData,
-    //   recomData: recomData
-    // })
   },
 
   onClickHotWord: function (e) {
@@ -733,62 +686,49 @@ Page({
     });
   },
 
+  getEleHeight() {
+    var headerHeight, searchHeight, proListToTop = [];
 
+    // 头部所占据的高度，在后续滑动时需要减掉该高度
+    wx.createSelectorQuery().select("#header").boundingClientRect(res => {
+      headerHeight = res.height;
+      // 回调函数为异步，所以只能在方法里面更新数据
+      this.setData({
+        headerHeight: headerHeight,
+      })
+    }).exec()
 
+    // 搜索框所占据的高度，在后续滑动时需要减掉该高度
+    wx.createSelectorQuery().select("#searchBox").boundingClientRect(res => {
+      searchHeight = res.height
+      this.setData({
+        searchHeight: searchHeight,
+      })
+    }).exec()
 
+    // 记录每一个类型的列表道顶部的距离
+    wx.createSelectorQuery().selectAll('.itemTitle').boundingClientRect((rects) => {
+      rects.forEach((rect) => {
+        proListToTop.push(rect.top.toFixed(2) - this.data.headerHeight - this.data.searchHeight);
+      })
+      this.setData({
+        proListToTop: proListToTop,
+      })
+    }).exec()
+
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.listTopGoods();
+    this.getEleHeight();
     // this.listCategory();
 
     // this.setData({
-    //   classfiySelect: this.data.leftText[0].id
+    //   currentActiveIndex: this.data.leftText[0].id
     // })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   },
 
   /**
@@ -799,53 +739,37 @@ Page({
   },
   //滚动触发
   scroll: function (e) {
-    var scrollTop = e.detail.scrollTop,
-      h = 0,
-      classfiySelect;
-    var that = this;
-    console.log('scrollTop');
-    console.log(scrollTop);
-    that.data.leftText.forEach(function (clssfiy, i) {
-      console.log(that.length(clssfiy['id']));
-      var _h = 26 + that.length(clssfiy['id']) * 90;
-      console.log('h')
-      // console.log(_h)
-      console.log(h)
-      console.log(that.data.isClick)
-      if (scrollTop >= h && !that.data.isClick) {
-        classfiySelect = clssfiy['id'];
-        // that.setData({
-        //   isClick: false
-        // })
-      }
-      h += _h;
-      // console.log(h);
-    })
-    that.setData({
-      classfiySelect: classfiySelect,
-      isClick: false
-    })
-  },
-  //求每一栏高度
-  length: function (e) {
-    var that = this;
-    var rightData = that.data.rightData;
-    for (var i = 0; i < rightData.length; i++) {
-      if (rightData[i]['id'] == e) {
-        return rightData[i]['goodsList'].length;
+    // 若滑动是点击菜单触发的，则不进行判断；
+    if (!this.data.isClickMenu) {
+      // 获取滚动的高度
+      var scrollTop = e.detail.scrollTop;
+      var currentActiveIndex;
+      for (let i = 0; i < proListToTop.length; i++) {
+        if (e.detail.scrollTop < proListToTop[i] && i !== 0 && e.detail.scrollTop > proListToTop[i - 1]) {
+          this.setData({
+            currentActiveIndex: i - 1,
+          })
+        }
       }
     }
+    // 将是点击菜单状态还原为false
+    this.setData({
+      isClickMenu: false,
+    })
   },
+
   //点击左边事件
-  left_list: function (e) {
-    console.log(e.currentTarget.dataset.id);
-    console.log(this);
-    var that = this;
-    var l_id = e.currentTarget.dataset.id;
-    that.setData({
-      rigId: l_id,
-      classfiySelect: l_id,
-      isClick: true
+  changeLeftMenu: function (e) {
+    // 当前点击的导航对应的右列表id
+    var rigId = e.currentTarget.dataset.id;
+    // 当前导航索引
+    var index = e.currentTarget.dataset.index;
+    this.setData({
+      rigId: rigId,
+      // 设置选中id
+      currentActiveIndex: index,
+      // 是否点击
+      isClickMenu: true
     })
   },
   //跳转详情界面
@@ -870,6 +794,7 @@ Page({
       })
     }
   },
+
   switchTab(event) {
     var cur = event.detail.current;
     var singleNavWidth = this.data.windowWidth / 5;

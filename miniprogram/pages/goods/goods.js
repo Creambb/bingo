@@ -743,6 +743,7 @@ Page({
     if (!this.data.isClickMenu) {
       // 获取滚动的高度
       var scrollTop = e.detail.scrollTop;
+      var proListToTop = this.data.proListToTop;
       var currentActiveIndex;
       for (let i = 0; i < proListToTop.length; i++) {
         if (e.detail.scrollTop < proListToTop[i] && i !== 0 && e.detail.scrollTop > proListToTop[i - 1]) {

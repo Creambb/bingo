@@ -8,12 +8,12 @@
   height: 140rpx;
 }
 
-.listActive {
+.leftActive {
   color: red;
   background-color: #fff;
 }
 
-.listInactive {
+.leftInactive {
   background-color: #F8F8F8;
 }
 
@@ -117,7 +117,7 @@
   width: 75%;
 }
 
-.listItem2 {
+.listItemSub {
   display: flex;
 }
 
@@ -479,7 +479,7 @@ page {
 }
 
 .leftScroll {
-  height: 1100rpx;
+  height: 100%;
   width: 180rpx;
   background: #F8F8F8;
 }

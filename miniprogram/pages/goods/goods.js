@@ -57,7 +57,7 @@ Page({
         icon: "../../images/goods/recommend.svg",
         navTitle: "推荐",
       },],
-    rightData2: [
+    dataList2: [
       {
         id: "01",
         title: "活动",
@@ -339,7 +339,7 @@ Page({
         ],
       },
     ],
-    rightData: [],
+    dataList: [],
     listData: [
       // {
       //   tag: 'hot',
@@ -471,7 +471,7 @@ Page({
       var data = result.body;
       var leftText = this.data.leftText.concat(this.data.topData);
       var topData = this.data.topData;
-      var rightData = this.data.rightData;
+      var dataList = this.data.dataList;
       this.data.topData.forEach((item) => {
         switch (item.id) {
           case '99999':
@@ -485,10 +485,10 @@ Page({
             break;
         }
       })
-      rightData = rightData.concat(topData);
+      dataList = dataList.concat(topData);
       this.setData({
         leftText: leftText,
-        rightData: rightData,
+        dataList: dataList,
       })
     }
     wx.hideLoading();
@@ -505,35 +505,18 @@ Page({
     const res = await this.requestInfo('/api/goods', 'POST', options);
     var data = res.body;
     console.log(data);
-    var rightData = this.data.rightData;
+    var dataList = this.data.dataList;
     // var categoryList = this.data.categoryList;
     data.forEach((item) => {
       if (item.isShow && item.goodsList.length != 0) {
-        rightData.push(item);
+        dataList.push(item);
       }
     })
     this.setData({
-      rightData: rightData
+      dataList: dataList
     })
     wx.hideLoading();
     this.getEleHeight();
-  },
-
-  resolveListGoods: function (data) {
-    console.log(data);
-    var listData = this.data.listData;
-    this.data.categoryList.forEach((item) => {
-      item.goodsList = [];
-      data.list.forEach((goodItem) => {
-        if (goodItem.goodsCatId == item.catId) {
-          item.goodsList.push(goodItem);
-        }
-      })
-      listData.push(item);
-    })
-    this.setData({
-      listData: listData
-    })
   },
 
   onClickHotWord: function (e) {
@@ -560,7 +543,7 @@ Page({
   getSearchList: function () {
     var value = this.data.searchWord;
     var searchList = [];
-    this.data.rightData.forEach((item) => {
+    this.data.dataList.forEach((item) => {
       item.goodsList.forEach((data) => {
         if (data.text.indexOf(value) > -1) {
           console.log(data.text.indexOf(value))
@@ -598,10 +581,14 @@ Page({
   },
 
   selectType: function (e) {
+    var index = e.currentTarget.dataset.index;
     console.log(e.currentTarget.dataset.id);
-    var current = e.currentTarget.dataset.id;
+    console.log(e.currentTarget.dataset.attribute);
+    var selectItem = this.data.selectitem;
+    selectItem.attributeList[attribute].checkIndex = index;
+    // var currentId = e.currentTarget.dataset.id;
     this.setData({
-      currentType: current
+      currentType: currentId
     })
   },
 
@@ -639,13 +626,25 @@ Page({
   },
 
   showDetails: function (e) {
-    console.log('showDetails');
-    console.log(e.currentTarget.dataset.selectitem)
+    // console.log('showDetails');
+    // console.log(e.currentTarget.dataset.selectitem);
+    var selectItem = e.currentTarget.dataset.selectitem;
+    var selectItemDetail = [];
+    // console.log(selectItem.attributeList);
+    for (let key in selectItem.attributeList) {
+      var obj = {
+        name: key,
+        typeList: selectItem.attributeList[key],
+        checkIndex: 0
+      }
+      selectItemDetail.push(obj);
+    }
+    console.log(selectItemDetail);
     this.setData({
       isShowAlert: true,
       isAlertShowAnimation: true,
       currentType: 0,
-      selectItem: e.currentTarget.dataset.selectitem
+      selectItemDetail: selectItemDetail
     })
   },
 
@@ -765,6 +764,10 @@ Page({
     var rigId = e.currentTarget.dataset.id;
     // 当前导航索引
     var index = e.currentTarget.dataset.index;
+    // 点击当前导航索引，不作处理
+    if (this.data.currentActiveIndex === index) {
+      return;
+    }
     this.setData({
       rigId: rigId,
       // 设置选中id

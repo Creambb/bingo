@@ -1,15 +1,23 @@
 <view class="contain">
-<view id="header">
-<header title="Bingo" />
-</view>
+	<view id="header">
+		<header title="Bingo" />
+	</view>
 	<view hidden="{{!isShowAlert}}" class="alertDetils">
 		<!-- <view class="alertDetilsBox {{isShowAlert? 'animationShowAlert' : 'animationHideAlert'}}" bindtap="hideAlert"> -->
 		<view class="alertDetilsBox {{isAlertShowAnimation? 'animationShowAlert' : 'animationHideAlert'}}">
-			<view class="alertTitle">{{selectItem.text}}</view>
-			<view>
-				<view class='alertTypeTitle'>颜色分类</view>
-				<block wx:for="{{selectItem.typeList}}" wx:for-list="item" wx:for-index="idx" wx:key="idx">
-					<text bindtap="selectType" data-id="{{idx}}" class="alertTypeBlock {{currentType == idx ?'typeActive':''}}">{{item}}</text>
+			<view class="alertTitle">{{selectItemDetail.text}}</view>
+			<view wx:if="{{selectItemDetail.typeList.length != 0}}">
+				<!-- <block wx:for="{{selectItemDetail.attributeList}}" wx:for-item="value" wx:for-index="key" wx:key="key">
+					<view class='alertTypeTitle'>{{key}}</view>
+					<block wx:for="{{value}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+						<text bindtap="selectType" data-item="{{attributeList}}" data-attribute="{{key}}" data-index="{{index}}" class="alertTypeBlock {{ == index ?'typeActive':''}}">{{item}}</text>
+					</block>
+				</block> -->
+				<block wx:for="{{selectItemDetail}}" wx:for-item="item" wx:for-index="index" wx:key="key">
+					<view class='alertTypeTitle'>{{item.name}}</view>
+					<block wx:for="{{item.typeList}}" wx:for-item="typeItem" wx:for-index="typeIdx" wx:key="typeIdx">
+						<text bindtap="selectType" data-index="{{index}}" data-typeIdx="{{typeIdx}}" class="alertTypeBlock {{item.checkIndex == typeIdx ?'typeActive':''}}">{{typeItem}}</text>
+					</block>
 				</block>
 			</view>
 			<view class="alertBottomBox">
@@ -50,7 +58,7 @@
 		<scroll-view scroll-y="true" scroll-top="{{scrollTop}}" scroll-into-view="true" scroll-with-animation="true">
 			<block wx:for="{{searchList}}" wx:for-list="item" wx:for-index="id" wx:key="id">
 				<view bindtap='particulars' class='listItem' data-id='{{item.id}}'>
-					<view class='listItem2' data-text="{{}}">
+					<view class='listItemSub' data-text="{{}}">
 						<view class='img'>
 							<image src='{{item.url}}'></image>
 						</view>
@@ -71,21 +79,21 @@
 	<view class='main' hidden="{{isSearch}}">
 		<view class='left'>
 			<scroll-view scroll-y="true" class="leftScroll" scroll-into-view="true" scroll-with-animation="true">
-				<block wx:for="{{rightData}}" wx:for-list="item" wx:for-index="index" wx:key="index">
-					<view class="{{currentActiveIndex == index?'listActive':'listInactive'}}" data-index="{{index}}" data-id='{{item.id}}' id='{{index}}' bindtap='changeLeftMenu'>
+				<block wx:for="{{dataList}}" wx:for-list="item" wx:for-index="index" wx:key="index">
+					<view class="{{currentActiveIndex == index?'leftActive':'leftInactive'}}" data-index="{{index}}" data-id='{{item.id}}' id='{{index}}' bindtap='changeLeftMenu'>
 						<image hidden="{{!item.icon}}" class="left-image" src="{{item.icon}}"></image>
-						<text>{{item.navTitle}}</text >
+						<text>{{item.navTitle}}</text>
 					</view>
 				</block>
 			</scroll-view>
 		</view>
 		<view class='right'>
 			<scroll-view scroll-y="true" style="height: 1100rpx" bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-into-view="{{'inToview'+rigId}}" scroll-with-animation="true">
-				<block wx:for="{{rightData}}" wx:for-list="item" wx:for-index="index" wx:key="index">
+				<block wx:for="{{dataList}}" wx:for-list="item" wx:for-index="index" wx:key="index">
 					<view wx:if="{{item.goodsList.length != 0}}" class='itemTitle' id="{{'inToview'+item.id}}">{{item.navTitle}}</view>
 					<view bindtap='particulars' class='listItem' data-id='{{item.id}}'>
 						<block wx:for="{{item.goodsList}}" wx:for-index="idx" wx:key="idx">
-							<view class='listItem2' data-text="{{}}">
+							<view class='listItemSub'>
 								<view class='img'>
 									<image src='{{item.goodsUrl}}'></image>
 								</view>

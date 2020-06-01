@@ -582,13 +582,20 @@ Page({
 
   selectType: function (e) {
     var index = e.currentTarget.dataset.index;
-    console.log(e.currentTarget.dataset.id);
-    console.log(e.currentTarget.dataset.attribute);
-    var selectItem = this.data.selectitem;
-    selectItem.attributeList[attribute].checkIndex = index;
-    // var currentId = e.currentTarget.dataset.id;
+    var typeidx = e.currentTarget.dataset.typeidx;
+    console.log(e.currentTarget.dataset);
+    // console.log(e.currentTarget.dataset.attribute);
+    var selectItem = this.data.selectItem;
+    console.log(selectItem);
+    selectItem.details[index].checkIndex = typeidx;
+    var obj = {}
+    selectItem.details.forEach((item) => {
+      console.log(item);
+      obj[item.name] = item.typeList[item.checkIndex];
+    })
+    console.log(obj);
     this.setData({
-      currentType: currentId
+      selectItem: selectItem
     })
   },
 
@@ -629,7 +636,7 @@ Page({
     // console.log('showDetails');
     // console.log(e.currentTarget.dataset.selectitem);
     var selectItem = e.currentTarget.dataset.selectitem;
-    var selectItemDetail = [];
+    var details = [];
     // console.log(selectItem.attributeList);
     for (let key in selectItem.attributeList) {
       var obj = {
@@ -637,15 +644,38 @@ Page({
         typeList: selectItem.attributeList[key],
         checkIndex: 0
       }
-      selectItemDetail.push(obj);
+      details.push(obj);
     }
-    console.log(selectItemDetail);
+    selectItem.details = details;
+    console.log(selectItem);
     this.setData({
       isShowAlert: true,
       isAlertShowAnimation: true,
       currentType: 0,
-      selectItemDetail: selectItemDetail
+      selectItem: selectItem
     })
+    this.listTypesStock();
+  },
+
+  async listTypesStock() {
+    console.log(this.data);
+    var requestData = {};
+    var obj = {};
+    var selectItem = this.data.selectItem;
+    selectItem.details.forEach((item) => {
+      console.log(item);
+      obj[item.name] = item.typeList[item.checkIndex];
+    })
+    requestData.goodsId = selectItem.goodsId;
+    requestData.type = JSON.stringify(obj);
+    console.log(requestData);
+    const options = {
+      cmd: 'ListTypesStock',
+      data: requestData
+    }
+    const res = await this.requestInfo('/api/goods', 'POST', options);
+    console.log('res');
+    console.log(res);
   },
 
   hideAlert: function () {
@@ -670,7 +700,7 @@ Page({
         method: method,
         data: options,
         header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         },
         success: function success(request) {
           resolve(request.data);

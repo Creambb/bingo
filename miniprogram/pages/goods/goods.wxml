@@ -5,18 +5,18 @@
 	<view hidden="{{!isShowAlert}}" class="alertDetils">
 		<!-- <view class="alertDetilsBox {{isShowAlert? 'animationShowAlert' : 'animationHideAlert'}}" bindtap="hideAlert"> -->
 		<view class="alertDetilsBox {{isAlertShowAnimation? 'animationShowAlert' : 'animationHideAlert'}}">
-			<view class="alertTitle">{{selectItemDetail.text}}</view>
-			<view wx:if="{{selectItemDetail.typeList.length != 0}}">
+			<view class="alertTitle">{{selectItem.goodsName}}</view>
+			<view wx:if="{{selectItem.details.typeList.length != 0}}">
 				<!-- <block wx:for="{{selectItemDetail.attributeList}}" wx:for-item="value" wx:for-index="key" wx:key="key">
 					<view class='alertTypeTitle'>{{key}}</view>
 					<block wx:for="{{value}}" wx:for-item="item" wx:for-index="index" wx:key="index">
 						<text bindtap="selectType" data-item="{{attributeList}}" data-attribute="{{key}}" data-index="{{index}}" class="alertTypeBlock {{ == index ?'typeActive':''}}">{{item}}</text>
 					</block>
 				</block> -->
-				<block wx:for="{{selectItemDetail}}" wx:for-item="item" wx:for-index="index" wx:key="key">
+				<block wx:for="{{selectItem.details}}" wx:for-item="item" wx:for-index="index" wx:key="key">
 					<view class='alertTypeTitle'>{{item.name}}</view>
 					<block wx:for="{{item.typeList}}" wx:for-item="typeItem" wx:for-index="typeIdx" wx:key="typeIdx">
-						<text bindtap="selectType" data-index="{{index}}" data-typeIdx="{{typeIdx}}" class="alertTypeBlock {{item.checkIndex == typeIdx ?'typeActive':''}}">{{typeItem}}</text>
+						<text bindtap="selectType" data-index="{{index}}" data-typeidx="{{typeIdx}}" class="alertTypeBlock {{item.checkIndex == typeIdx ?'typeActive':''}}">{{typeItem}}</text>
 					</block>
 				</block>
 			</view>

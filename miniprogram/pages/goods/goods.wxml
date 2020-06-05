@@ -5,7 +5,9 @@
 	<view hidden="{{!isShowAlert}}" class="alertDetils">
 		<!-- <view class="alertDetilsBox {{isShowAlert? 'animationShowAlert' : 'animationHideAlert'}}" bindtap="hideAlert"> -->
 		<view class="alertDetilsBox {{isAlertShowAnimation? 'animationShowAlert' : 'animationHideAlert'}}">
+			
 			<view class="alertTitle">{{selectItem.goodsName}}</view>
+			<view class='alertTypeTitle'>库存{{goodsStock}}件</view>
 			<view wx:if="{{selectItem.details.typeList.length != 0}}">
 				<!-- <block wx:for="{{selectItemDetail.attributeList}}" wx:for-item="value" wx:for-index="key" wx:key="key">
 					<view class='alertTypeTitle'>{{key}}</view>
@@ -80,9 +82,9 @@
 		<view class='left'>
 			<scroll-view scroll-y="true" class="leftScroll" scroll-into-view="true" scroll-with-animation="true">
 				<block wx:for="{{dataList}}" wx:for-list="item" wx:for-index="index" wx:key="index">
-					<view class="{{currentActiveIndex == index?'leftActive':'leftInactive'}}" data-index="{{index}}" data-id='{{item.id}}' id='{{index}}' bindtap='changeLeftMenu'>
+					<view wx:if="{{item.goodsList.length != 0}}" class="{{currentActiveIndex == index?'leftActive':'leftInactive'}}" data-index="{{index}}" data-id='{{item.id}}' id='{{index}}' bindtap='changeLeftMenu'>
 						<image hidden="{{!item.icon}}" class="left-image" src="{{item.icon}}"></image>
-						<text>{{item.navTitle}}</text>
+						<text>{{item.catName}}</text>
 					</view>
 				</block>
 			</scroll-view>
@@ -90,12 +92,12 @@
 		<view class='right'>
 			<scroll-view scroll-y="true" style="height: 1100rpx" bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-into-view="{{'inToview'+rigId}}" scroll-with-animation="true">
 				<block wx:for="{{dataList}}" wx:for-list="item" wx:for-index="index" wx:key="index">
-					<view wx:if="{{item.goodsList.length != 0}}" class='itemTitle' id="{{'inToview'+item.id}}">{{item.navTitle}}</view>
+					<view wx:if="{{item.goodsList.length != 0}}" class='itemTitle' id="{{'inToview'+item.id}}">{{item.catName}}</view>
 					<view bindtap='particulars' class='listItem' data-id='{{item.id}}'>
 						<block wx:for="{{item.goodsList}}" wx:for-index="idx" wx:key="idx">
 							<view class='listItemSub'>
 								<view class='img'>
-									<image src='{{item.goodsUrl}}'></image>
+									<image src='{{item.goodsImg}}'></image>
 								</view>
 								<view class='listText'>
 									<text>{{item.goodsName}}</text>

@@ -15,29 +15,29 @@ Page({
       {
         id: "01",
         icon: "../../images/goods/activity.svg",
-        navTitle: "活动",
+        catName: "活动",
       },
       {
         id: "02",
         icon: "../../images/goods/new.svg",
-        navTitle: "新品",
+        catName: "新品",
       },
       {
         id: "03",
         icon: "../../images/goods/recommend.svg",
-        navTitle: "推荐",
+        catName: "推荐",
       },
       {
         id: "04",
-        navTitle: "晨光系列",
+        catName: "晨光系列",
       },
       {
         id: "05",
-        navTitle: "文具专区",
+        catName: "文具专区",
       },
       {
         id: "06",
-        navTitle: "精品专区",
+        catName: "精品专区",
       },
     ],
     leftText: [],
@@ -45,17 +45,17 @@ Page({
       {
         id: "99999",
         icon: "../../images/goods/activity.svg",
-        navTitle: "活动",
+        catName: "活动",
       },
       {
         id: "99998",
         icon: "../../images/goods/new.svg",
-        navTitle: "新品",
+        catName: "新品",
       },
       {
         id: "99997",
         icon: "../../images/goods/recommend.svg",
-        navTitle: "推荐",
+        catName: "推荐",
       },],
     dataList2: [
       {
@@ -462,13 +462,14 @@ Page({
     const options = {
       cmd: 'ListTopGoods'
     }
-    const res = await this.requestInfo('/api/goods', 'POST', options)
+    const res = await this.requestInfo('/api/wechat/goods', 'POST', options)
     this.resolveTopGoods(res);
   },
 
   resolveTopGoods: function (result) {
     if (result.code === 0) {
       var data = result.body;
+      console.log(data);
       var leftText = this.data.leftText.concat(this.data.topData);
       var topData = this.data.topData;
       var dataList = this.data.dataList;
@@ -502,7 +503,7 @@ Page({
     const options = {
       cmd: 'ListGoods'
     }
-    const res = await this.requestInfo('/api/goods', 'POST', options);
+    const res = await this.requestInfo('/api/wechat/goods', 'POST', options);
     var data = res.body;
     console.log(data);
     var dataList = this.data.dataList;
@@ -583,19 +584,27 @@ Page({
   selectType: function (e) {
     var index = e.currentTarget.dataset.index;
     var typeidx = e.currentTarget.dataset.typeidx;
-    console.log(e.currentTarget.dataset);
+    // console.log(e.currentTarget.dataset);
     // console.log(e.currentTarget.dataset.attribute);
     var selectItem = this.data.selectItem;
-    console.log(selectItem);
+    var goodsStock, obj = {};
     selectItem.details[index].checkIndex = typeidx;
-    var obj = {}
     selectItem.details.forEach((item) => {
       console.log(item);
       obj[item.name] = item.typeList[item.checkIndex];
+
     })
+    console.log('obj');
     console.log(obj);
+    this.data.typeStockList.forEach((item) => {
+      console.log(JSON.stringify(item.goodsSpecs) == JSON.stringify(obj));
+      if (JSON.stringify(item.goodsSpecs) == JSON.stringify(obj)) {
+        goodsStock = item.goodsStock;
+      }
+    })
     this.setData({
-      selectItem: selectItem
+      selectItem: selectItem,
+      goodsStock: goodsStock
     })
   },
 
@@ -642,25 +651,23 @@ Page({
       var obj = {
         name: key,
         typeList: selectItem.attributeList[key],
-        checkIndex: 0
+        // checkIndex: 0
       }
       details.push(obj);
     }
     selectItem.details = details;
     console.log(selectItem);
     this.setData({
-      isShowAlert: true,
       isAlertShowAnimation: true,
       currentType: 0,
       selectItem: selectItem
-    })
+    });
     this.listTypesStock();
   },
 
   async listTypesStock() {
     console.log(this.data);
-    var requestData = {};
-    var obj = {};
+    var goodsStock = 0, obj = {}, requestData = {};
     var selectItem = this.data.selectItem;
     selectItem.details.forEach((item) => {
       console.log(item);
@@ -673,9 +680,20 @@ Page({
       cmd: 'ListTypesStock',
       data: requestData
     }
-    const res = await this.requestInfo('/api/goods', 'POST', options);
+    const res = await this.requestInfo('/api/wechat/goods', 'POST', options);
+    var data = res.body;
     console.log('res');
     console.log(res);
+    data.forEach((item) => {
+      goodsStock += item.goodsStock;
+    })
+    console.log('goodsStock');
+    console.log(goodsStock);
+    this.setData({
+      typeStockList: data,
+      goodsStock: goodsStock,
+      isShowAlert: true,
+    })
   },
 
   hideAlert: function () {
@@ -693,7 +711,6 @@ Page({
 
   requestInfo(api, method, options) {
     var _url = 'http://172.19.13.240:3000' + api
-    console.log(_url)
     return new Promise(function (resolve, reject) {
       wx.request({
         url: _url,
@@ -782,7 +799,7 @@ Page({
         }
       }
     }
-    // 将是点击菜单状态还原为false
+    // 将点击菜单状态还原为false
     this.setData({
       isClickMenu: false,
     })

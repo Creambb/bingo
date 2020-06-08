@@ -520,6 +520,28 @@ Page({
     this.getEleHeight();
   },
 
+  async addToCharts() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    const options = {
+      cmd: 'AddToCharts',
+      body: {
+        userId: 1,
+        goodsId: this.data.selectItem.goodsId,
+        specsId: this.data.selectSpecs.id,
+        cartNum: 2,
+        // isCheck: true,
+      }
+    }
+    const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
+    var data = res.body;
+    wx.hideLoading();
+    this.setData({
+      isShowAlert: false
+    })
+  },
+
   onClickHotWord: function (e) {
     this.setData({
       searchWord: e.currentTarget.dataset.text
@@ -587,28 +609,27 @@ Page({
     // console.log(e.currentTarget.dataset);
     // console.log(e.currentTarget.dataset.attribute);
     var selectItem = this.data.selectItem;
-    var goodsStock, obj = {};
+    var selectSpecs, obj = {};
     selectItem.details[index].checkIndex = typeidx;
     selectItem.details.forEach((item) => {
       console.log(item);
       obj[item.name] = item.typeList[item.checkIndex];
-
     })
-    console.log('obj');
-    console.log(obj);
     this.data.typeStockList.forEach((item) => {
       console.log(JSON.stringify(item.goodsSpecs) == JSON.stringify(obj));
       if (JSON.stringify(item.goodsSpecs) == JSON.stringify(obj)) {
-        goodsStock = item.goodsStock;
+        selectSpecs = item;
       }
     })
+    console.log('selectSpecs');
+    console.log(selectSpecs);
     this.setData({
       selectItem: selectItem,
-      goodsStock: goodsStock
+      selectSpecs: selectSpecs
     })
   },
 
-  addToCharts: function (e) {
+  addToCharts2: function (e) {
     console.log('addToCharts');
     var isExist = false;
     var num = 0;
@@ -710,7 +731,7 @@ Page({
   },
 
   requestInfo(api, method, options) {
-    var _url = 'http://172.19.13.240:3000' + api
+    var _url = 'http://172.19.13.240:3001' + api
     return new Promise(function (resolve, reject) {
       wx.request({
         url: _url,

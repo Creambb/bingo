@@ -49,7 +49,7 @@
 		</view>
 		<view class="chartsBottom">
 			<view>合计:<text class="chartsBottomPrice">￥{{count}}</text></view>
-			<button type="mini" bindtap="Checkout">结算</button>
+			<button type="mini" bindtap="checkout">结算</button>
 		</view>
 	</view>
 </view>

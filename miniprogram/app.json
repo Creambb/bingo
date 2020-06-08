@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/charts/charts",
     "pages/goods/goods",
     "pages/slip/slip",
     "pages/test/test",
-    "pages/charts/charts",
     "pages/order/order",
     "pages/home/home",
     "pages/mine/mine",

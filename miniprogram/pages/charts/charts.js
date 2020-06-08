@@ -38,12 +38,40 @@ Page({
     count: 0
   },
 
-  Checkout: function () {
+  async ListChartGoods() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    var obj = {
+      userId: 1
+    }
+    var options = {
+      cmd: 'ListChartGoods',
+      body: obj
+    }
+    const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
+    var data = res.body;
+    console.log(data);
+    var dataList = this.data.dataList;
+    // var categoryList = this.data.categoryList;
+    data.forEach((item) => {
+      if (item.isShow && item.goodsList.length != 0) {
+        dataList.push(item);
+      }
+    })
+    this.setData({
+      dataList: dataList
+    })
+    wx.hideLoading();
+    this.getEleHeight();
+  },
+
+  checkout: function () {
     var chartsList = this.data.chartsList.filter(function (item) {
       return item.isChecked;
     })
     console.log(chartsList);
-    if(this.data.count > 0){
+    if (this.data.count > 0) {
       wx.navigateTo({
         url: '/pages/order/order?list=' + JSON.stringify(chartsList),
       })
@@ -175,61 +203,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var chartsList = app.globalData.chartsList;
-    this.setData({
-      chartsList: chartsList
-    })
-    console.log(chartsList)
+    // var chartsList = app.globalData.chartsList;
+    // this.setData({
+    //   chartsList: chartsList
+    // })
+    this.ListChartGoods();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    wx.hideTabBar({
-      animation: true
+  requestInfo(api, method, options) {
+    var _url = 'http://172.19.13.240:3001' + api
+    return new Promise(function (resolve, reject) {
+      wx.request({
+        url: _url,
+        method: method,
+        data: options,
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success: function success(request) {
+          resolve(request.data);
+        },
+        fail: function fail(error) {
+          reject(error);
+        },
+        complete: function complete(aaa) {
+          // 加载完成
+        }
+      });
     });
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

@@ -7,7 +7,7 @@
 		<view class="alertDetilsBox {{isAlertShowAnimation? 'animationShowAlert' : 'animationHideAlert'}}">
 			
 			<view class="alertTitle">{{selectItem.goodsName}}</view>
-			<view class='alertTypeTitle'>库存{{goodsStock}}件</view>
+			<view class='alertTypeTitle'>库存{{selectSpecs.goodsStock}}件</view>
 			<view wx:if="{{selectItem.details.typeList.length != 0}}">
 				<!-- <block wx:for="{{selectItemDetail.attributeList}}" wx:for-item="value" wx:for-index="key" wx:key="key">
 					<view class='alertTypeTitle'>{{key}}</view>

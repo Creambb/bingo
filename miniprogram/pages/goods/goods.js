@@ -874,5 +874,20 @@ Page({
       currentTab: cur,
       navScrollLeft: (cur - 2) * singleNavWidth
     });
-  }
+  },
+
+
+  /**
+    * 生命周期函数--监听页面隐藏
+    */
+  onHide: function () {
+    console.log('------goods页面onHide了----------');
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    console.log('------goods页面onUnload了----------');
+  },
 })

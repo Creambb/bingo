@@ -36,7 +36,7 @@
 		<!-- <text class='headerClass'>分类</text>
 
 		<text class='headerPin'>/品牌</text> -->
-		<image wx:if="{{isSearch}}" bindtap="backToGoods" class="searchBack" src="../../images/goods/previous.svg"></image>
+		<image wx:if="{{isSearch}}" bindtap="backToGoodsList" class="searchBack" src="../../images/goods/previous.svg"></image>
 
 		<view class="search">
 
@@ -62,13 +62,13 @@
 				<view bindtap='particulars' class='listItem' data-id='{{item.id}}'>
 					<view class='listItemSub' data-text="{{}}">
 						<view class='img'>
-							<image src='{{item.url}}'></image>
+							<image src='{{item.goodsImg}}'></image>
 						</view>
 						<view class='listText'>
-							<text>{{item.text}}</text>
-							<text class='money'>¥{{item.money}}</text>
+							<text>{{item.goodsName}}</text>
+							<text class='money'>¥{{item.shopPrice}}</text>
 							<view>
-								<text>已售{{item.sum}}</text>
+								<text>已售{{item.saleNum}}</text>
 								<image bindtap="showDetails" data-selectitem="{{item}}" class="add-image" src="../../images/goods/add.svg"></image>
 							</view>
 						</view>

@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    chartsList: [
+    ordersList: [
       {
         id: 1,
         url: "../../images/goods/pencil01.jpg",
@@ -103,27 +103,80 @@ Page({
         amount: 20
       },
     ],
-    count: 0
+    isShowConfirm: false,
+    orderMark: '',
+    amount: 0
   },
 
-  computeCount: function () {
-    var count = 0;
-    var chartsList = this.data.chartsList;
-    chartsList.forEach((item) => {
-      count += item.money * item.number
+  goPayAmount() {
+    this.setData({ isShowConfirm: true });
+    this.orderSubmit();
+  },
+
+  async orderSubmit() {
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    var obj = {}, list = [];
+    this.data.ordersList.forEach(item => {
+      console.log(item);
+      obj.cartsId = item.id;
+      obj.goodsId = item.goodsId;
+      obj.goodsNum = item.cartNum;
+      obj.goodsName = item.goodsDetail.goodsName;
+      obj.goodsImg = item.goodsDetail.goodsImg;
+      obj.goodsPrice = item.goodsDetail.shopPrice;
+      obj.goodsSpecId = item.specsDetail.specsId;
+      obj.goodsSpecs = item.specsDetail.goodsSpecs;
+      list.push(obj);
+    });
+    var body = {
+      userId: 1,
+      realTotalAmount: this.data.amount,
+      orderMark: this.data.orderMark,
+      goodsList: list
+    };
+    console.log('body');
+    console.log(body);
+    const options = {
+      cmd: 'SubmitOrder',
+      body: body
+    }
+    const res = await this.requestInfo('/api/wechat/orders', 'POST', options)
+  },
+
+
+  payConfirm() {
+
+  },
+
+  payCancle() {
+
+  },
+
+  computeAmount() {
+    var amount = 0;
+    var ordersList = this.data.ordersList;
+    ordersList.forEach((item) => {
+      console.log(item);
+      if (item.isChecked) {
+        amount += Number(item.goodsDetail.shopPrice) * item.cartNum;
+        console.log(amount);
+      }
     })
     this.setData({
-      count: count
+      amount: amount
     })
   },
 
   computeItemCount: function () {
-    var chartsList = this.data.chartsList;
-    chartsList.forEach((item) => {
+    var ordersList = this.data.ordersList;
+    ordersList.forEach((item) => {
       item.amount = item.money * item.number
     })
     this.setData({
-      chartsList: chartsList
+      ordersList: ordersList
     })
   },
 
@@ -135,11 +188,37 @@ Page({
       var orders = JSON.parse(options.list);
       console.log(orders);
       this.setData({
-        chartsList: orders
+        ordersList: orders
       })
     }
+    console.log('ordersList');
+    console.log(this.data.ordersList);
     this.computeItemCount();
-    this.computeCount();
+    this.computeAmount();
+  },
+
+
+  requestInfo(api, method, options) {
+    var _url = 'http://172.19.13.240:3001' + api
+    return new Promise(function (resolve, reject) {
+      wx.request({
+        url: _url,
+        method: method,
+        data: options,
+        header: {
+          'Content-Type': 'application/json'
+        },
+        success: function success(request) {
+          resolve(request.data);
+        },
+        fail: function fail(error) {
+          reject(error);
+        },
+        complete: function complete(aaa) {
+          // 加载完成
+        }
+      });
+    });
   },
 
   /**

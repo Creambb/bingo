@@ -514,7 +514,7 @@ Page({
       }
     })
     this.setData({
-      dataList: dataList
+      dataList: dataList,
     })
     wx.hideLoading();
     this.getEleHeight();
@@ -568,17 +568,31 @@ Page({
     var searchList = [];
     this.data.dataList.forEach((item) => {
       item.goodsList.forEach((data) => {
-        if (data.text.indexOf(value) > -1) {
-          console.log(data.text.indexOf(value))
+        if (data.goodsName.indexOf(value) > -1) {
+          console.log(data.goodsName.indexOf(value))
           console.log(data);
           searchList.push(data);
         }
       })
     })
+    // const res = new Map();
+    // searchList = searchList.filter((item) => !res.has(item.id));
+    // searchList = [...new Set(searchList)];
+    searchList = this.uniqueArr(searchList, 'goodsId');
+    console.log(searchList);
     this.setData({
       searchList: searchList
     })
   },
+
+  uniqueArr: function (arr, key) {
+    var obj = {};
+    return arr.reduce(function (item, next) {
+      obj[next[key]] ? '' : obj[next[key]] = true && item.push(next);
+      return item;
+    }, []);
+  },
+
 
   searchGoods: function () {
     if (!this.data.isSearch) {
@@ -597,9 +611,10 @@ Page({
     })
   },
 
-  backToGoods: function () {
+  backToGoodsList: function () {
     this.setData({
-      isSearch: false
+      isSearch: false,
+      searchWord: ''
     })
   },
 

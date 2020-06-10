@@ -35,14 +35,14 @@
 				<image wx:if="{{chartsItem.isChecked}}" src="../../images/charts/checked.svg"></image>
 				<image wx:else src="../../images/charts/unchecked.svg"></image>
 			</view>
-			<image class="chartsItemImg" src="{{chartsItem.goods_detail.goodsImg}}"></image>
+			<image class="chartsItemImg" src="{{chartsItem.goodsDetail.goodsImg}}"></image>
 			<view class="chartsItemDetails">
-				<text class="chartsItemText1">{{chartsItem.goods_detail.goodsName}}</text>
+				<text class="chartsItemText1">{{chartsItem.goodsDetail.goodsName}}</text>
 				<!-- <text class="chartsItemText2">{{chartsItem.type}}</text> -->
 				<text class="chartsItemText2" decode="true">
-				<block wx:for="{{chartsItem.goods_specs.goodsSpecs}}" wx:for-item="value" wx:for-index="key" wx:key="key">{{value}}&nbsp;</block>
+				<block wx:for="{{chartsItem.specsDetail.goodsSpecs}}" wx:for-item="value" wx:for-index="key" wx:key="key">{{value}}&nbsp;</block>
 				</text>				
-				<text class="chartsItemText3">￥{{chartsItem.goods_detail.shopPrice}}</text>
+				<text class="chartsItemText3">￥{{chartsItem.goodsDetail.shopPrice}}</text>
 				<view class="chartsItemNum">
 					<image bindtap="decreaseNum" data-selectitem="{{chartsItem}}" src="../../images/charts/decrease.svg"></image>
 					<text>{{chartsItem.cartNum}}</text>

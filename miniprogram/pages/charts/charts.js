@@ -35,7 +35,7 @@ Page({
       // },
     ],
     deleteOperate: null,
-    count: 0
+    amount: 0
   },
 
   async ListChartGoods() {
@@ -49,21 +49,21 @@ Page({
       cmd: 'ListChartGoods',
       body: obj
     }
+    var chartsList = [];
     const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
     var data = res.body;
+    // data.forEach((item) => {
+    //   if (item.goods_specs) {
+    //     for (var key in item.goods_specs) {
+
+    //      }
+    //   }
+    // })
     console.log(data);
-    var dataList = this.data.dataList;
-    // var categoryList = this.data.categoryList;
-    data.forEach((item) => {
-      if (item.isShow && item.goodsList.length != 0) {
-        dataList.push(item);
-      }
-    })
     this.setData({
-      dataList: dataList
+      chartsList: data
     })
     wx.hideLoading();
-    this.getEleHeight();
   },
 
   checkout: function () {
@@ -71,7 +71,7 @@ Page({
       return item.isChecked;
     })
     console.log(chartsList);
-    if (this.data.count > 0) {
+    if (this.data.amount > 0) {
       wx.navigateTo({
         url: '/pages/order/order?list=' + JSON.stringify(chartsList),
       })
@@ -82,14 +82,14 @@ Page({
     console.log('cancleSelectAll');
     this.onChangeSelectAll(false);
     this.setData({
-      count: 0
+      amount: 0
     })
   },
 
   selectAll: function () {
     console.log('selectAll');
     this.onChangeSelectAll(true);
-    this.computeCount();
+    this.computeAmount();
   },
 
   onChangeSelectAll: function (bool) {
@@ -103,16 +103,18 @@ Page({
     })
   },
 
-  computeCount() {
-    var count = 0;
+  computeAmount() {
+    var amount = 0;
     var chartsList = this.data.chartsList;
     chartsList.forEach((item) => {
+      console.log(item);
       if (item.isChecked) {
-        count += item.money * item.number
+        amount += Number(item.goods_detail.shopPrice) * item.cartNum;
+        console.log(amount);
       }
     })
     this.setData({
-      count: count
+      amount: amount
     })
   },
 
@@ -162,7 +164,7 @@ Page({
       chartsList: chartsList,
       isShowSelectAll: isAll
     })
-    this.computeCount();
+    this.computeAmount();
   },
 
   decreaseNum: function (e) {
@@ -171,8 +173,8 @@ Page({
       console.log(item);
       console.log(index);
       if (item.id === selectItem.id) {
-        item.number--;
-        if (item.number === 0) {
+        item.cartNum--;
+        if (item.cartNum === 0) {
           return false;
         }
       }
@@ -181,7 +183,7 @@ Page({
     this.setData({
       chartsList: chartsList
     })
-    this.computeCount();
+    this.computeAmount();
   },
 
   addNum: function (e) {
@@ -190,26 +192,35 @@ Page({
     chartsList.forEach((item) => {
       console.log(item);
       if (item.id === selectItem.id) {
-        item.number++;
+        item.cartNum++;
       }
     })
     this.setData({
       chartsList: chartsList
     })
-    this.computeCount();
+    this.computeAmount();
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    // var chartsList = app.globalData.chartsList;
-    // this.setData({
-    //   chartsList: chartsList
-    // })
-    this.ListChartGoods();
+  async updateCharts() {
+    var chartsList = this.data.chartsList;
+    var options = {}, obj = { userId: 1 };
+    if (chartsList.length === 0) {
+      options = {
+        cmd: 'ClearCharts',
+        body: obj
+      }
+      console.log('ClearCharts');
+      const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
+    } else {
+      obj.chartsList = chartsList;
+      options = {
+        cmd: 'UpdateCharts',
+        body: obj
+      }
+      console.log('UpdateCharts');
+      const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
+    }
   },
-
 
   requestInfo(api, method, options) {
     var _url = 'http://172.19.13.240:3001' + api
@@ -233,4 +244,42 @@ Page({
       });
     });
   },
+
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+  },
+
+  /**
+ * 生命周期函数--监听页面加载
+ */
+  onShow: function (options) {
+    // var chartsList = app.globalData.chartsList;
+    // this.setData({
+    //   chartsList: chartsList
+    // })
+    console.log('------charts页面onShow了----------');
+
+    this.ListChartGoods();
+  },
+
+
+  /**
+  * 生命周期函数--监听页面隐藏
+  */
+  onHide: function () {
+    this.updateCharts();
+    console.log('------charts页面onHide了----------');
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    console.log('------charts页面onUnload了----------');
+  },
+
 })

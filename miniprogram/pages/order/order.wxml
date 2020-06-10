@@ -1,32 +1,45 @@
 <!--pages/order/order.wxml-->
 <!--pages/charts/charts.wxml-->
-<header bg='../../images/index/back.svg' title="Bingo"></header>
+<header bg='../../images/index/back.svg' title="确认订单"></header>
 <view class="container">
 	<view wx:if="{{isShowConfirm}}" class="confirmDetils">
 		<view class="confirmBox {{isAlertShowAnimation? 'animationShowAlert' : 'animationHideAlert'}}">
-			<view class="confirmTitle">确定不要了吗？</view>
+			<view class="confirmTitle">确定支付吗？</view>
 			<view class="confirmButton">
-				<text bindtap="cancleConfirm">取消</text>
-				<text bindtap="clearConfirm">确定</text>
+				<text bindtap="payCancle">取消</text>
+				<text bindtap="payConfirm">确定</text>
 			</view>
 		</view>
 	</view>
-	<view class="chartsBox" wx:if="{{chartsList.length !== 0}}">
-		<view class="chartsItem" wx:for="{{chartsList}}" wx:for-item="chartsItem" wx:for-index="idx" wx:key="idx">
-			<image class="chartsItemImg" src="{{chartsItem.url}}"></image>
+	<view class="chartsBox" wx:if="{{ordersList.length !== 0}}">
+		<text class="listText">商品列表</text>
+		<view class="chartsItem" wx:for="{{ordersList}}" wx:for-item="chartsItem" wx:for-index="idx" wx:key="idx">
+			<image class="chartsItemImg" src="{{chartsItem.goodsDetail.goodsImg}}"></image>
 			<view class="chartsItemDetails">
-				<view class="chartsItemLeft">
-					<text class="chartsItemText1">{{chartsItem.text}}</text>
-					<text class="chartsItemText2">{{chartsItem.type}}</text>
-				</view>
-				<text class="chartsItemText2">×{{chartsItem.number}}</text>
-				<text class="chartsItemText3">￥{{chartsItem.amount}}</text>
+				<text class="chartsItemText1">{{chartsItem.goodsDetail.goodsName}}</text>
+				<!-- <text class="chartsItemText2">{{chartsItem.type}}</text> -->
+				<text class="chartsItemText2" decode="true">
+				<block wx:for="{{chartsItem.specsDetail.goodsSpecs}}" wx:for-item="value" wx:for-index="key" wx:key="key">{{value}}&nbsp;</block>
+				</text>
+				<text class="chartsItemText3">￥{{chartsItem.goodsDetail.shopPrice * chartsItem.cartNum}}</text>
 			</view>
 		</view>
-
 	</view>
+
+	<view class="orderMsgBox">
+		<view>支付方式</view>
+		<view>
+			<image class="icon payIcon" bindtap="addMark" src="../../images/order/wechat_pay.svg"></image>微信
+		</view>
+	</view>
+
+	<view class="orderMsgBox">
+		<view>备注</view>
+		<image class="icon" bindtap="goBack" src="../../images/index/next.svg"></image>
+	</view>
+	<textarea>{{orderMark}}</textarea>
 	<view class="chartsBottom">
-		<view>合计:<text class="chartsBottomPrice">￥{{count}}</text></view>
-		<button type="mini" class="chartsButton" bindtap="goBack">去支付</button>
+		<view>合计:<text class="chartsBottomPrice">￥{{amount}}</text></view>
+		<button type="mini" class="chartsButton" bindtap="goPayAmount">去支付</button>
 	</view>
 </view>

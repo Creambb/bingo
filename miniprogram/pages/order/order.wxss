@@ -8,8 +8,19 @@
   overflow: auto;
 }
 
+.listText{
+  font-size: 26rpx;
+  padding: 20rpx 30rpx;
+  display: inline-block;
+}
+
+.icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
 .chartsBox {
-  padding-top: 20rpx;
+  /* padding-top: 20rpx; */
   background-color: #fff;
   border-radius: 10rpx;
 }
@@ -57,7 +68,7 @@
 }
 
 .chartsItemDetails {
-  width: calc(100% - 160rpx);
+  width: calc(100% - 120rpx);
   display: flex;
   /* flex-direction: row; */
   justify-content: space-between;
@@ -81,6 +92,8 @@
 
 .chartsItemText3 {
   margin-top: 10rpx;
+  min-width: 80rpx;
+  text-align: right;
   font-size: 28rpx;
   color: #000;
   font-weight: bold;
@@ -107,6 +120,52 @@
   min-width: 20rpx;
 }
 
+
+.orderMsgBox button {
+  /* width: 240px; */
+  padding: 0;
+  color: #fff;
+  font-weight: normal;
+}
+
+.orderMsgBox button {
+  margin: 0;
+  background: #FF0000;
+  max-width: 60px;
+  height: 60rpx;
+  min-height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  border-radius: 60rpx;
+}
+
+
+.orderMsgBox {
+  border-top: 1px solid #f0f0f0;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  margin-top: 10rpx;
+}
+
+.orderMsgBox view {
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+
+.orderMsgBoxPrice {
+  color: #FF6600;
+  font-size: 26rpx;
+}
+
+.payIcon{
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+
 .chartsBottom button {
   color: #fff;
   font-weight: normal;
@@ -118,7 +177,7 @@
   font-size: 30rpx;
   border-radius: 60rpx;
   width: auto;
-padding: 0 30rpx;
+  padding: 0 30rpx;
 
 }
 
@@ -148,6 +207,8 @@ padding: 0 30rpx;
   color: #FF6600;
   font-size: 26rpx;
 }
+
+
 
 .confirmDetils {
   position: fixed;

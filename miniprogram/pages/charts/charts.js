@@ -11,19 +11,8 @@ Page({
     isShowConfirm: false,
     isShowSelectAll: false,
     chartsList: [
-      {
-        id: 1,
-        url: "../../images/goods/pencil01.jpg",
-        text: "晨光优品中性笔",
-        typeList: ['粉红色', '淡蓝色', '淡黄色'],
-        type: '粉红色',
-        money: 3,
-        sum: 20,
-        number: 1,
-        isChecked: false,
-      },
       // {
-      //   id: 2,
+      //   id: 1,
       //   url: "../../images/goods/pencil01.jpg",
       //   text: "晨光优品中性笔",
       //   typeList: ['粉红色', '淡蓝色', '淡黄色'],
@@ -53,8 +42,8 @@ Page({
     const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
     var data = res.body;
     // data.forEach((item) => {
-    //   if (item.goods_specs) {
-    //     for (var key in item.goods_specs) {
+    //   if (item.specsDetail) {
+    //     for (var key in item.specsDetail) {
 
     //      }
     //   }
@@ -64,6 +53,7 @@ Page({
       chartsList: data
     })
     wx.hideLoading();
+    // this.onChangeChecked();
   },
 
   checkout: function () {
@@ -109,7 +99,7 @@ Page({
     chartsList.forEach((item) => {
       console.log(item);
       if (item.isChecked) {
-        amount += Number(item.goods_detail.shopPrice) * item.cartNum;
+        amount += Number(item.goodsDetail.shopPrice) * item.cartNum;
         console.log(amount);
       }
     })

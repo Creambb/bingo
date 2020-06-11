@@ -1,4 +1,6 @@
 // pages/order/order.js
+const WXAPI = require('../../wxapi/index.js');
+
 Page({
 
   /**
@@ -143,7 +145,7 @@ Page({
       cmd: 'SubmitOrder',
       body: body
     }
-    const res = await this.requestInfo('/api/wechat/orders', 'POST', options)
+    const res = await WXAPI.requestInfo('/api/wechat/orders', 'POST', options)
   },
 
 

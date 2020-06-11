@@ -3,11 +3,9 @@
     "pages/charts/charts",
     "pages/goods/goods",
     "pages/slip/slip",
-    "pages/test/test",
     "pages/order/order",
     "pages/home/home",
     "pages/mine/mine",
-    "pages/template/template",
     "pages/index/index",
     "pages/logs/logs"
   ],

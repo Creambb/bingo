@@ -150,7 +150,16 @@ Page({
 
 
   payConfirm() {
-
+    wx.showLoading({
+      title: '加载中',
+    })
+    const options = {
+      cmd: 'PayOrder',
+      body: {
+        // orderId: 
+      }
+    }
+    const res = await WXAPI.requestInfo('/api/wechat/orders', 'POST', options)
   },
 
   payCancle() {

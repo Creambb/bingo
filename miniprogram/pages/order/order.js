@@ -145,7 +145,9 @@ Page({
       cmd: 'SubmitOrder',
       body: body
     }
-    const res = await WXAPI.requestInfo('/api/wechat/orders', 'POST', options)
+    const res = await WXAPI.requestInfo('/api/wechat/orders', 'POST', options);
+    console.log(res);
+
   },
 
 

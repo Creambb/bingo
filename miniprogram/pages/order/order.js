@@ -1,4 +1,6 @@
 // pages/order/order.js
+const WXAPI = require('../../wxapi/index.js');
+
 Page({
 
   /**
@@ -143,12 +145,23 @@ Page({
       cmd: 'SubmitOrder',
       body: body
     }
-    const res = await this.requestInfo('/api/wechat/orders', 'POST', options)
+    const res = await WXAPI.requestInfo('/api/wechat/orders', 'POST', options);
+    console.log(res);
+
   },
 
 
   payConfirm() {
-
+    wx.showLoading({
+      title: '加载中',
+    })
+    const options = {
+      cmd: 'PayOrder',
+      body: {
+        // orderId: 
+      }
+    }
+    const res = await WXAPI.requestInfo('/api/wechat/orders', 'POST', options)
   },
 
   payCancle() {

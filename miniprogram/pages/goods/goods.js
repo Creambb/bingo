@@ -1,5 +1,5 @@
 // pages/class/class.js
-let proListToTop = [];
+const WXAPI = require('../../wxapi/index.js');
 
 let app = getApp();
 
@@ -462,7 +462,7 @@ Page({
     const options = {
       cmd: 'ListTopGoods'
     }
-    const res = await this.requestInfo('/api/wechat/goods', 'POST', options)
+    const res = await WXAPI.requestInfo('/api/wechat/goods', 'POST', options)
     this.resolveTopGoods(res);
   },
 
@@ -503,7 +503,7 @@ Page({
     const options = {
       cmd: 'ListGoods'
     }
-    const res = await this.requestInfo('/api/wechat/goods', 'POST', options);
+    const res = await WXAPI.requestInfo('/api/wechat/goods', 'POST', options);
     var data = res.body;
     console.log(data);
     var dataList = this.data.dataList;
@@ -534,7 +534,7 @@ Page({
         // isCheck: true,
       }
     }
-    const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
+    const res = await WXAPI.requestInfo('/api/wechat/charts', 'POST', options);
     var data = res.body;
     wx.hideLoading();
     this.setData({
@@ -716,7 +716,7 @@ Page({
       cmd: 'ListTypesStock',
       data: requestData
     }
-    const res = await this.requestInfo('/api/wechat/goods', 'POST', options);
+    const res = await WXAPI.requestInfo('/api/wechat/goods', 'POST', options);
     var data = res.body;
     console.log('res');
     console.log(res);

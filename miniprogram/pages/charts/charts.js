@@ -1,4 +1,5 @@
 // pages/charts/charts.js
+const WXAPI = require('../../wxapi/index.js');
 
 var app = getApp();
 
@@ -39,7 +40,7 @@ Page({
       body: obj
     }
     var chartsList = [];
-    const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
+    const res = await WXAPI.requestInfo('/api/wechat/charts', 'POST', options);
     var data = res.body;
     // data.forEach((item) => {
     //   if (item.specsDetail) {
@@ -200,7 +201,7 @@ Page({
         body: obj
       }
       console.log('ClearCharts');
-      const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
+      const res = await WXAPI.requestInfo('/api/wechat/charts', 'POST', options);
     } else {
       obj.chartsList = chartsList;
       options = {
@@ -208,7 +209,7 @@ Page({
         body: obj
       }
       console.log('UpdateCharts');
-      const res = await this.requestInfo('/api/wechat/charts', 'POST', options);
+      const res = await WXAPI.requestInfo('/api/wechat/charts', 'POST', options);
     }
   },
 

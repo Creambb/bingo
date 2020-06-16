@@ -1,0 +1,6 @@
+/* pages/demo/demo.wxss */
+.main {
+  display: inline-block;
+  margin-top: 200rpx;
+  color: red;
+}

@@ -1,5 +1,5 @@
 "use strict";
-const WXAPI = require('../../wxapi/index.js');
+const WXAPI = require('./wxapi/index.js');
 
 App({
     globalData: {

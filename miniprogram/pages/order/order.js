@@ -151,7 +151,7 @@ Page({
   },
 
 
-  payConfirm() {
+  async payConfirm() {
     wx.showLoading({
       title: '加载中',
     })
@@ -208,30 +208,6 @@ Page({
     console.log(this.data.ordersList);
     this.computeItemCount();
     this.computeAmount();
-  },
-
-
-  requestInfo(api, method, options) {
-    var _url = 'http://172.19.13.240:3001' + api
-    return new Promise(function (resolve, reject) {
-      wx.request({
-        url: _url,
-        method: method,
-        data: options,
-        header: {
-          'Content-Type': 'application/json'
-        },
-        success: function success(request) {
-          resolve(request.data);
-        },
-        fail: function fail(error) {
-          reject(error);
-        },
-        complete: function complete(aaa) {
-          // 加载完成
-        }
-      });
-    });
   },
 
   /**

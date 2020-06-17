@@ -1,2 +1,16 @@
 <!--pages/demo/demo.wxml-->
-<text class="main">pages/demo/demo.wxml</text>
+<!-- <text class="main">pages/demo/demo.wxml</text> -->
+<swiper autoplay circular interval="2000" indicator-dots>
+	<swiper-item>
+		<image src="../../images/goods/pencil01.jpg"></image>
+	</swiper-item>
+	<swiper-item>
+		<image src="../../images/goods/pencil02.jpg"></image>
+	</swiper-item>
+	<swiper-item>
+		<image src="../../images/goods/pencil03.jpg"></image>
+	</swiper-item>
+	<swiper-item>
+		<image src="../../images/goods/pencil04.jpg"></image>
+	</swiper-item>
+</swiper>

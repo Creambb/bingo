@@ -4,3 +4,12 @@
   margin-top: 200rpx;
   color: red;
 }
+
+image{
+  width: 100%;
+}
+
+swiper{
+  width: 100%;
+  height: calc(100vw * 352 / 320);
+}

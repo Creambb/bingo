@@ -5,3 +5,17 @@
 	　　<view>This is index.wxml</view>
 	<!-- <template is="msgItem" data="{{navScrollLeft: globalData.navScrollLeft,currentTab: globalData.currentTab, navData: globalData.navData, switchNav: switchNav}}" /> -->
 </view>
+<swiper autoplay circular interval="2000" indicator-dots>
+	<swiper-item>
+		<image src="../../images/goods/pencil01.jpg"></image>
+	</swiper-item>
+	<swiper-item>
+		<image src="../../images/goods/pencil02.jpg"></image>
+	</swiper-item>
+	<swiper-item>
+		<image src="../../images/goods/pencil03.jpg"></image>
+	</swiper-item>
+	<swiper-item>
+		<image src="../../images/goods/pencil04.jpg"></image>
+	</swiper-item>
+</swiper>

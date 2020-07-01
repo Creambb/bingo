@@ -1,6 +1,6 @@
 <view class="contain">
 	<view id="header">
-		<header title="Bingo" />
+		<Header title="Bingo" />
 	</view>
 	<view hidden="{{!isShowAlert}}" class="alertDetils">
 		<!-- <view class="alertDetilsBox {{isShowAlert? 'animationShowAlert' : 'animationHideAlert'}}" bindtap="hideAlert"> -->

@@ -1,4 +1,4 @@
 <!--pages/mine/mine.wxml-->
-<header title="Bingo"></header>
+<Header title="Bingo"></Header>
 
 <text>pages/mine/mine.wxml</text>

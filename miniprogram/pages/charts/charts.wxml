@@ -1,5 +1,5 @@
 <!--pages/charts/charts.wxml-->
-<header title="Bingo"></header>
+<Header title="Bingo"></Header>
 <view class="container">
 	<view wx:if="{{isShowConfirm}}" class="confirmDetils">
 		<view class="confirmBox {{isAlertShowAnimation? 'animationShowAlert' : 'animationHideAlert'}}">

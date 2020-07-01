@@ -1,5 +1,5 @@
 <!--pages/home/home.wxml-->
-<header title="Bingo"></header>
+<Header title="Bingo"></Header>
 <view>
 	<import src="../template/template.wxml" />
 	　　<view>This is index.wxml</view>
@@ -19,3 +19,4 @@
 		<image src="../../images/goods/pencil04.jpg"></image>
 	</swiper-item>
 </swiper>
+　　<view class="test">This is index.wxml</view>

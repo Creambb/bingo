@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/demo/demo",
+    "pages/home/home",
     "pages/charts/charts",
+    "pages/demo/demo",
     "pages/goods/goods",
     "pages/slip/slip",
     "pages/order/order",
-    "pages/home/home",
     "pages/mine/mine",
     "pages/index/index",
     "pages/logs/logs"
@@ -43,7 +43,7 @@
     "selectedColor": "#fc7946"
   },
   "usingComponents": {
-    "header": "components/header/header"
+    "Header": "components/header/header"
   },
   "window": {
     "backgroundTextStyle": "light",

@@ -1,10 +1,23 @@
 /* pages/goods/goods.wxss */
+@import "./styles/iconfont.wxss" ;
 
 /**index.wxss**/
 page{
   width: 100%;
   height: 100%;
 }
+
+page, view, text, swiper, swiper-item, image, navigator{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+page{
+  /* 定义颜色 */
+  --themeColor: #fc7946;
+}
+
 .container{
   width: 100%;
   height: 100%;

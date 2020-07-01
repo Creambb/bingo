@@ -1,6 +1,6 @@
 <!--pages/order/order.wxml-->
 <!--pages/charts/charts.wxml-->
-<header bg='../../images/index/back.svg' title="确认订单"></header>
+<Header bg='../../images/index/back.svg' title="确认订单"></Header>
 <view class="container">
 	<view wx:if="{{isShowConfirm}}" class="confirmDetils">
 		<view class="confirmBox {{isAlertShowAnimation? 'animationShowAlert' : 'animationHideAlert'}}">

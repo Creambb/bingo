@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    swiperList:[],
     navData: [123],
     globalData: app.globalData,
     switchNav: app.switchNav,
@@ -22,6 +23,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 发送异步请求获取轮播图
     console.log(app);
     // console.log(this.data.switchNav);
   },
